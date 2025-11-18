@@ -21,6 +21,9 @@ export default function Footer() {
                 <Link
                   to="/about"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   About Us
                 </Link>
@@ -29,6 +32,9 @@ export default function Footer() {
                 <Link
                   to="/services"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Services
                 </Link>
@@ -37,6 +43,9 @@ export default function Footer() {
                 <Link
                   to="/pricing"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Pricing
                 </Link>
@@ -45,6 +54,9 @@ export default function Footer() {
                 <Link
                   to="/testimonials"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Testimonials
                 </Link>
@@ -59,6 +71,9 @@ export default function Footer() {
                 <Link
                   to="/services/web-applications"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Web Development
                 </Link>
@@ -67,6 +82,9 @@ export default function Footer() {
                 <Link
                   to="/services/mobile-applications"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Mobile Apps
                 </Link>
@@ -75,6 +93,9 @@ export default function Footer() {
                 <Link
                   to="/services/desktop-applications"
                   className="text-gray-400 hover:text-white transition-colors"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                 >
                   Desktop Apps
                 </Link>

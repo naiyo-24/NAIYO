@@ -8,11 +8,11 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Pricing", path: "/pricing" },
-    { name: "Testimonials", path: "/testimonials" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about", scrollTop: true },
+    { name: "Services", path: "/services", scrollTop: true },
+    { name: "Pricing", path: "/pricing", scrollTop: true },
+    { name: "Testimonials", path: "/testimonials", scrollTop: true },
+    { name: "Contact", path: "/contact", scrollTop: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -47,6 +47,11 @@ export default function Navbar() {
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                 }}
+                onClick={
+                  item.scrollTop
+                    ? () => window.scrollTo({ top: 0, behavior: "smooth" })
+                    : undefined
+                }
               >
                 <span className="transition-all duration-300">{item.name}</span>
                 {isActive(item.path) && (
