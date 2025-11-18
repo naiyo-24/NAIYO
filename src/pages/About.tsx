@@ -71,9 +71,10 @@ export default function About() {
             <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 text-center md:text-left">
               CEO's Message
             </h2>
-            <div className="text-center md:text-left text-gray-500 mb-4 text-lg">
+            {/* <div className="text-center md:text-left text-gray-500 mb-4 text-lg">
               Leadership insights and vision for the future
-            </div>
+            </div> */}
+            <br />
             <div className="bg-white rounded-2xl shadow-lg p-8 relative">
               <div className="absolute -top-7 left-8 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center shadow">
                 <span className="text-3xl">&#8220;</span>
@@ -92,6 +93,9 @@ export default function About() {
                 focus on building lasting partnerships and delivering value that
                 drives business growth.
               </p>
+              <div className="absolute -bottom-7 right-8 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center shadow">
+                <span className="text-3xl">&#8221;</span>
+              </div>
               <div className="font-bold text-xl text-gray-900 mb-1">
                 Debasish Baidya
               </div>

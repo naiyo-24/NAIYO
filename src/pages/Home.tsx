@@ -128,90 +128,78 @@ export default function Home() {
   return (
     <div className="pt-16">
       <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 overflow-hidden">
-        {/* Animated coding/IT themed background for hero section only, pastel greyscale */}
+        {/* Animated Diagonal Grid Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <svg
             width="100%"
             height="100%"
-            className="w-full h-full"
-            style={{ position: "absolute", left: 0, top: 0 }}
+            viewBox="0 0 1440 600"
+            preserveAspectRatio="none"
+            style={{ position: "absolute", width: "100%", height: "100%" }}
           >
-            <defs>
-              <linearGradient id="codeGradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#e5e5e5" />
-                <stop offset="100%" stopColor="#bdbdbd" />
-              </linearGradient>
-              <filter id="blur" x="-10%" y="-10%" width="120%" height="120%">
-                <feGaussianBlur stdDeviation="8" />
-              </filter>
-            </defs>
-            {[...Array(12)].map((_, i) => (
-              <g
+            {[...Array(20)].map((_, i) => (
+              <line
                 key={i}
-                style={{
-                  animation: `floatCode${i} 8s ease-in-out infinite alternate`,
-                }}
+                x1={i * 80}
+                y1={0}
+                x2={i * 80 - 200}
+                y2={600}
+                stroke="#379854ff"
+                strokeWidth="1"
+                opacity="0.13"
               >
-                <text
-                  x={80 + i * 90}
-                  y={120 + (i % 2) * 60}
-                  fontSize="54"
-                  fontFamily="monospace"
-                  fill="url(#codeGradient)"
-                  filter="url(#blur)"
-                  opacity="0.7"
-                >
-                  {"{"}
-                </text>
-                <text
-                  x={120 + i * 90}
-                  y={180 + ((i + 1) % 2) * 60}
-                  fontSize="54"
-                  fontFamily="monospace"
-                  fill="url(#codeGradient)"
-                  filter="url(#blur)"
-                  opacity="0.7"
-                >
-                  {"<"}
-                </text>
-                <text
-                  x={160 + i * 90}
-                  y={120 + (i % 2) * 60}
-                  fontSize="54"
-                  fontFamily="monospace"
-                  fill="url(#codeGradient)"
-                  filter="url(#blur)"
-                  opacity="0.7"
-                >
-                  {"/>"}
-                </text>
-                <text
-                  x={200 + i * 90}
-                  y={180 + ((i + 1) % 2) * 60}
-                  fontSize="54"
-                  fontFamily="monospace"
-                  fill="url(#codeGradient)"
-                  filter="url(#blur)"
-                  opacity="0.7"
-                >
-                  {"}"}
-                </text>
-              </g>
+                <animate
+                  attributeName="x1"
+                  values={`${i * 80};${i * 80 + 40};${i * 80}`}
+                  dur={`${6 + i * 0.5}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="x2"
+                  values={`${i * 80 - 200};${i * 80 - 160};${i * 80 - 200}`}
+                  dur={`${6 + i * 0.5}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0.13;0.25;0.13"
+                  dur={`${3 + i * 0.3}s`}
+                  repeatCount="indefinite"
+                />
+              </line>
+            ))}
+            {[...Array(20)].map((_, i) => (
+              <line
+                key={"r" + i}
+                x1={0}
+                y1={i * 30}
+                x2={1440}
+                y2={i * 30 + 200}
+                stroke="#a59f9fff"
+                strokeWidth="1"
+                opacity="0.10"
+              >
+                <animate
+                  attributeName="y1"
+                  values={`${i * 30};${i * 30 + 20};${i * 30}`}
+                  dur={`${5 + i * 0.4}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="y2"
+                  values={`${i * 30 + 200};${i * 30 + 220};${i * 30 + 200}`}
+                  dur={`${5 + i * 0.4}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0.10;0.22;0.10"
+                  dur={`${2.5 + i * 0.2}s`}
+                  repeatCount="indefinite"
+                />
+              </line>
             ))}
           </svg>
-          <style>{`
-            ${[...Array(12)]
-              .map(
-                (_, i) => `
-              @keyframes floatCode${i} {
-                0% { transform: translateY(0px); opacity: 0.6; }
-                50% { transform: translateY(30px); opacity: 0.8; }
-                100% { transform: translateY(0px); opacity: 0.6; }
-              }
-            `
-              )
-              .join("")}
-          `}</style>
         </div>
         <div className="relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

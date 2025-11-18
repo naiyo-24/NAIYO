@@ -1,47 +1,53 @@
-import TestimonialCard from '../components/TestimonialCard';
+import TestimonialCard from "../components/TestimonialCard";
 
 export default function Testimonials() {
   const testimonials = [
     {
-      name: 'Sarah Johnson',
-      role: 'CEO',
-      company: 'TechStart Inc.',
-      content: 'Naiyo24 transformed our online presence completely. Their attention to detail and commitment to excellence is unmatched. Our website now converts 3x better!',
+      name: "Sourav Chatterjee",
+      role: "Shop Owner",
+      company: "Chatterjee Electronics",
+      content:
+        "Naiyo24 made a website for my shop in Kolkata. The team was very helpful and explained everything in Bengali. My customers find it easy to use.",
       rating: 5,
     },
     {
-      name: 'Michael Chen',
-      role: 'Marketing Director',
-      company: 'Growth Solutions',
-      content: 'Working with Naiyo24 was a game-changer for our business. They delivered exactly what we needed, on time and within budget. Highly recommended!',
+      name: "Moumita Dey",
+      role: "Private Tutor",
+      company: "Dey Coaching Centre",
+      content:
+        "I wanted an online portal for my students. Naiyo24 built it quickly and it works great. The support team is very polite and responsive.",
       rating: 5,
     },
     {
-      name: 'Emily Rodriguez',
-      role: 'Founder',
-      company: 'Creative Studio',
-      content: 'The team at Naiyo24 is incredibly talented and professional. They took our vision and brought it to life beyond our expectations. Outstanding work!',
+      name: "Arindam Ghosh",
+      role: "Freelance Designer",
+      company: "Ghosh Creations",
+      content:
+        "My portfolio site looks amazing now. Naiyo24 understood my ideas and made it better. Highly recommend for creative people.",
       rating: 5,
     },
     {
-      name: 'David Park',
-      role: 'CTO',
-      company: 'InnovateTech',
-      content: 'Exceptional development quality and support. Naiyo24 built a complex application that scales perfectly with our growing user base. True professionals!',
+      name: "Rituparna Banerjee",
+      role: "Startup Owner",
+      company: "Banerjee Solutions",
+      content:
+        "We got our first app built by Naiyo24. The process was smooth and the team was always available for questions. Will work with them again.",
       rating: 5,
     },
     {
-      name: 'Jessica Williams',
-      role: 'Product Manager',
-      company: 'Digital Ventures',
-      content: 'From initial consultation to final delivery, the experience was seamless. Naiyo24 understood our requirements perfectly and delivered a fantastic product.',
+      name: "Subhajit Sen",
+      role: "School Teacher",
+      company: "Sen Academy",
+      content:
+        "Naiyo24 created a website for my coaching classes. The students and parents find it very useful. Good job by the team!",
       rating: 5,
     },
     {
-      name: 'Robert Thompson',
-      role: 'Business Owner',
-      company: 'Local Services Co.',
-      content: 'Best decision we made was partnering with Naiyo24. Our mobile app has received amazing feedback from users. The team is responsive and skilled.',
+      name: "Piyali Mukherjee",
+      role: "Bakery Owner",
+      company: "Mukherjee Sweets",
+      content:
+        "I wanted a simple app for my bakery. Naiyo24 delivered exactly what I needed and explained everything in Bengali. Very happy with the service.",
       rating: 5,
     },
   ];
@@ -53,7 +59,8 @@ export default function Testimonials() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl font-bold mb-6">Client Testimonials</h1>
             <p className="text-xl text-gray-600">
-              Don't just take our word for it. Here's what our clients have to say about working with us.
+              Don't just take our word for it. Here's what our clients have to
+              say about working with us.
             </p>
           </div>
         </div>
@@ -73,7 +80,8 @@ export default function Testimonials() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Join Our Happy Clients</h2>
           <p className="text-lg text-gray-600 mb-4">
-            We've helped over 50 businesses achieve their digital goals. Let us help you succeed too.
+            We've helped over 50 businesses achieve their digital goals. Let us
+            help you succeed too.
           </p>
           <div className="grid grid-cols-3 gap-8 mt-12">
             <div>
