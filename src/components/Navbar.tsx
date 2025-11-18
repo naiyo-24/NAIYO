@@ -7,7 +7,7 @@ export default function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { name: "Home", path: "/" },
+    { name: "Home", path: "/", scrollTop: true },
     { name: "About", path: "/about", scrollTop: true },
     { name: "Services", path: "/services", scrollTop: true },
     { name: "Pricing", path: "/pricing", scrollTop: true },

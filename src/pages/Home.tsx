@@ -214,10 +214,20 @@ export default function Home() {
                   success for businesses of all sizes.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Link to="/contact">
+                  <Link
+                    to="/contact"
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                  >
                     <Button variant="primary">Get Started</Button>
                   </Link>
-                  <Link to="/services">
+                  <Link
+                    to="/services"
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                  >
                     <Button variant="secondary" showArrow>
                       Our Services
                     </Button>
@@ -322,7 +332,10 @@ export default function Home() {
               Comprehensive digital solutions{" "}
               <span className="italic">tailored to your needs</span>
             </h2>
-            <Link to="/services">
+            <Link
+              to="/services"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
               <Button variant="outline" showArrow>
                 View All Services
               </Button>
@@ -359,7 +372,11 @@ export default function Home() {
               Our team of experts is dedicated to providing top-notch digital
               solutions that drive results and exceed expectations.
             </p>
-            <Link to="/about" className="inline-block mt-6">
+            <Link
+              to="/about"
+              className="inline-block mt-6"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
               <Button variant="secondary" showArrow>
                 About Our Company
               </Button>
