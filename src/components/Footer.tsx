@@ -87,16 +87,16 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
                 <Mail size={18} className="mt-1 text-gray-400" />
-                <span className="text-gray-400">info@naiyo24.com</span>
+                <span className="text-gray-400">office@naiyo24.com</span>
               </li>
               <li className="flex items-start space-x-2">
                 <Phone size={18} className="mt-1 text-gray-400" />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">+91 6289171798</span>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin size={18} className="mt-1 text-gray-400" />
                 <span className="text-gray-400">
-                  123 Business St, Tech City, TC 12345
+                  1/30 Chittaranjan Colony, Baghajatin Kolkata- 700032
                 </span>
               </li>
             </ul>

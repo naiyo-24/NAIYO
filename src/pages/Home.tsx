@@ -230,11 +230,12 @@ export default function Home() {
                 </div>
               </div>
               <div className="hidden md:block">
-                <div className="bg-white rounded-lg shadow-xl p-8">
+                <div className="rounded-lg shadow-xl p-10">
                   <img
-                    src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800"
-                    alt="Digital Excellence"
-                    className="rounded-lg w-full"
+                    src="/assets/images/naiyo24_logo.jpeg"
+                    alt="Naiyo24 Logo"
+                    className="rounded-lg bg-white object-contain p-2 mx-auto"
+                    style={{ maxWidth: "500px", height: "auto" }}
                   />
                 </div>
               </div>
@@ -401,7 +402,8 @@ export default function Home() {
           <Link to="/contact">
             <Button
               variant="primary"
-              className="bg-white text-black hover:bg-gray-100"
+              className="bg-white text-black hover:bg-gray-100 border-2 border-white rounded-xl shadow-lg px-6 py-3 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-200"
+              style={{ color: "#111", background: "#fff" }}
             >
               Get In Touch
             </Button>

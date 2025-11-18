@@ -108,7 +108,7 @@ export default function About() {
               </div>
               <div className="flex gap-4 mt-2">
                 <a
-                  href="#"
+                  href="https://in.linkedin.com/company/naiyo24-official"
                   className="text-gray-500 hover:text-gray-900"
                   aria-label="LinkedIn"
                 >
@@ -122,7 +122,7 @@ export default function About() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://x.com"
                   className="text-gray-500 hover:text-gray-900"
                   aria-label="X"
                 >
@@ -136,7 +136,7 @@ export default function About() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/naiyo24_official/"
                   className="text-gray-500 hover:text-gray-900"
                   aria-label="Instagram"
                 >
@@ -150,7 +150,7 @@ export default function About() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/Naiyo24/"
                   className="text-gray-500 hover:text-gray-900"
                   aria-label="Facebook"
                 >
