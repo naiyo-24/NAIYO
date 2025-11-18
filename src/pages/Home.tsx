@@ -127,41 +127,128 @@ export default function Home() {
 
   return (
     <div className="pt-16">
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                Transform Your Business with{" "}
-                <span className="italic">Digital Excellence</span>
-              </h1>
-              <p className="text-lg text-gray-600 mb-8">
-                We craft innovative digital solutions that drive growth and
-                success for businesses of all sizes.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/contact">
-                  <Button variant="primary">Get Started</Button>
-                </Link>
-                <Link to="/services">
-                  <Button variant="secondary" showArrow>
-                    Our Services
-                  </Button>
-                </Link>
+      <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 overflow-hidden">
+        {/* Animated coding/IT themed background for hero section only, pastel greyscale */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <svg
+            width="100%"
+            height="100%"
+            className="w-full h-full"
+            style={{ position: "absolute", left: 0, top: 0 }}
+          >
+            <defs>
+              <linearGradient id="codeGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#e5e5e5" />
+                <stop offset="100%" stopColor="#bdbdbd" />
+              </linearGradient>
+              <filter id="blur" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur stdDeviation="8" />
+              </filter>
+            </defs>
+            {[...Array(12)].map((_, i) => (
+              <g
+                key={i}
+                style={{
+                  animation: `floatCode${i} 8s ease-in-out infinite alternate`,
+                }}
+              >
+                <text
+                  x={80 + i * 90}
+                  y={120 + (i % 2) * 60}
+                  fontSize="54"
+                  fontFamily="monospace"
+                  fill="url(#codeGradient)"
+                  filter="url(#blur)"
+                  opacity="0.7"
+                >
+                  {"{"}
+                </text>
+                <text
+                  x={120 + i * 90}
+                  y={180 + ((i + 1) % 2) * 60}
+                  fontSize="54"
+                  fontFamily="monospace"
+                  fill="url(#codeGradient)"
+                  filter="url(#blur)"
+                  opacity="0.7"
+                >
+                  {"<"}
+                </text>
+                <text
+                  x={160 + i * 90}
+                  y={120 + (i % 2) * 60}
+                  fontSize="54"
+                  fontFamily="monospace"
+                  fill="url(#codeGradient)"
+                  filter="url(#blur)"
+                  opacity="0.7"
+                >
+                  {"/>"}
+                </text>
+                <text
+                  x={200 + i * 90}
+                  y={180 + ((i + 1) % 2) * 60}
+                  fontSize="54"
+                  fontFamily="monospace"
+                  fill="url(#codeGradient)"
+                  filter="url(#blur)"
+                  opacity="0.7"
+                >
+                  {"}"}
+                </text>
+              </g>
+            ))}
+          </svg>
+          <style>{`
+            ${[...Array(12)]
+              .map(
+                (_, i) => `
+              @keyframes floatCode${i} {
+                0% { transform: translateY(0px); opacity: 0.6; }
+                50% { transform: translateY(30px); opacity: 0.8; }
+                100% { transform: translateY(0px); opacity: 0.6; }
+              }
+            `
+              )
+              .join("")}
+          `}</style>
+        </div>
+        <div className="relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  Transform Your Business with{" "}
+                  <span className="italic">Digital Excellence</span>
+                </h1>
+                <p className="text-lg text-gray-600 mb-8">
+                  We craft innovative digital solutions that drive growth and
+                  success for businesses of all sizes.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/contact">
+                    <Button variant="primary">Get Started</Button>
+                  </Link>
+                  <Link to="/services">
+                    <Button variant="secondary" showArrow>
+                      Our Services
+                    </Button>
+                  </Link>
+                </div>
+                <div className="grid grid-cols-3 gap-8 mt-12">
+                  <StatCard value="200+" label="Projects Completed" />
+                  <StatCard value="98%" label="Client Satisfaction" />
+                  <StatCard value="50+" label="Global Clients" />
+                </div>
               </div>
-              <div className="grid grid-cols-3 gap-8 mt-12">
-                <StatCard value="200+" label="Projects Completed" />
-                <StatCard value="98%" label="Client Satisfaction" />
-                <StatCard value="50+" label="Global Clients" />
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <div className="bg-white rounded-lg shadow-xl p-8">
-                <img
-                  src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Digital Excellence"
-                  className="rounded-lg w-full"
-                />
+              <div className="hidden md:block">
+                <div className="bg-white rounded-lg shadow-xl p-8">
+                  <img
+                    src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Digital Excellence"
+                    className="rounded-lg w-full"
+                  />
+                </div>
               </div>
             </div>
           </div>

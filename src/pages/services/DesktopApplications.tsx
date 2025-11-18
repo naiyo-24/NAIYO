@@ -1,7 +1,7 @@
-import { Monitor, Layers, Database, Lock, Cog, Zap } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import Button from '../components/Button';
-import FeatureCard from '../components/FeatureCard';
+import { Monitor, Layers, Database, Lock, Cog, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
+import Button from "../../components/Button";
+import FeatureCard from "../../components/FeatureCard";
 
 export default function DesktopApplications() {
   return (
@@ -12,7 +12,8 @@ export default function DesktopApplications() {
             <div>
               <h1 className="text-5xl font-bold mb-6">Desktop Applications</h1>
               <p className="text-xl text-gray-600 mb-8">
-                Powerful desktop software solutions for Windows, macOS, and Linux platforms.
+                Powerful desktop software solutions for Windows, macOS, and
+                Linux platforms.
               </p>
               <Link to="/contact">
                 <Button variant="primary">Start Your Project</Button>
@@ -32,7 +33,9 @@ export default function DesktopApplications() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Desktop Development Services</h2>
+            <h2 className="text-4xl font-bold mb-4">
+              Desktop Development Services
+            </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Professional desktop applications tailored to your business needs.
             </p>
@@ -75,13 +78,28 @@ export default function DesktopApplications() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6 text-center">Technologies We Use</h2>
+            <h2 className="text-4xl font-bold mb-6 text-center">
+              Technologies We Use
+            </h2>
             <p className="text-lg text-gray-600 mb-8 text-center">
-              We use modern frameworks and tools for desktop application development.
+              We use modern frameworks and tools for desktop application
+              development.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {['Electron', '.NET', 'Qt', 'JavaFX', 'Python', 'C++', 'Rust', 'Tauri'].map((tech) => (
-                <div key={tech} className="bg-white p-6 rounded-lg text-center font-semibold shadow-sm">
+              {[
+                "Electron",
+                ".NET",
+                "Qt",
+                "JavaFX",
+                "Python",
+                "C++",
+                "Rust",
+                "Tauri",
+              ].map((tech) => (
+                <div
+                  key={tech}
+                  className="bg-white p-6 rounded-lg text-center font-semibold shadow-sm"
+                >
                   {tech}
                 </div>
               ))}
@@ -92,9 +110,12 @@ export default function DesktopApplications() {
 
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Build Your Desktop Application?</h2>
+          <h2 className="text-4xl font-bold mb-6">
+            Ready to Build Your Desktop Application?
+          </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Let's create a powerful desktop solution that meets your specific business requirements.
+            Let's create a powerful desktop solution that meets your specific
+            business requirements.
           </p>
           <Link to="/contact">
             <Button variant="primary">Get Started Today</Button>
