@@ -7,7 +7,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <span className="text-xl font-bold mb-4 block">Naiyo24</span>
+            <span className="text-xl font-bold mb-4 block">
+              Our Mission and Vision
+            </span>
             <p className="text-gray-400 text-sm">
               We craft innovative digital solutions that drive growth and
               success for businesses of all sizes.
