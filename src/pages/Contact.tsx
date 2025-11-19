@@ -231,18 +231,18 @@ export default function Contact() {
 // Add MemoryGame component below
 function MemoryGame() {
   const initialCards = [
-    { id: 1, value: "🍎" },
-    { id: 2, value: "🍌" },
-    { id: 3, value: "🍇" },
-    { id: 4, value: "🍉" },
-    { id: 5, value: "🍒" },
-    { id: 6, value: "🍍" },
-    { id: 7, value: "🍎" },
-    { id: 8, value: "🍌" },
-    { id: 9, value: "🍇" },
-    { id: 10, value: "🍉" },
-    { id: 11, value: "🍒" },
-    { id: 12, value: "🍍" },
+    { id: 1, value: "⚙️" },
+    { id: 2, value: "💻" },
+    { id: 3, value: "📡" },
+    { id: 4, value: "📁" },
+    { id: 5, value: "🛰️" },
+    { id: 6, value: "🌐" },
+    { id: 7, value: "⚙️" },
+    { id: 8, value: "💻" },
+    { id: 9, value: "📡" },
+    { id: 10, value: "📁" },
+    { id: 11, value: "🛰️" },
+    { id: 12, value: "🌐" },
   ];
   const shuffled = initialCards.sort(() => Math.random() - 0.5);
   const [cards, setCards] = useState(shuffled);
@@ -284,19 +284,19 @@ function MemoryGame() {
             <button
               key={idx}
               className={`w-16 h-16 text-2xl font-bold rounded-lg shadow transition-all duration-300 bg-gray-100 flex items-center justify-center ${
-                isFlipped ? "bg-green-100" : "bg-gray-200"
+                isFlipped ? "bg-gray-100" : "bg-gray-600"
               }`}
               onClick={() => handleFlip(idx)}
               disabled={isFlipped}
             >
-              {isFlipped ? card.value : "❓"}
+              {isFlipped ? card.value : "❔"}
             </button>
           );
         })}
       </div>
       <div className="mb-2 text-sm text-gray-600">Moves: {moves}</div>
       {matched.length === cards.length && (
-        <div className="text-green-600 font-semibold mb-2">You won! 🎉</div>
+        <div className="text-green-600 font-semibold mb-2">Great Moves!</div>
       )}
       <button
         className="px-4 py-2 bg-gray-300 rounded-lg text-sm font-medium hover:bg-gray-400 transition mt-2"
