@@ -1,8 +1,4 @@
-# models/about_naiyo.py
-# SQLAlchemy model for 'about_naiyo' table
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from models.db import sqlalchemy_db as db
 
 class AboutNaiyo(db.Model):
 	__tablename__ = 'about_naiyo'

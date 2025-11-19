@@ -1,6 +1,7 @@
 # API endpoints for AboutNaiyo table
 from flask import Blueprint, request, jsonify
-from models.about_naiyo import db, AboutNaiyo
+from models.about_naiyo import AboutNaiyo
+from models.db import sqlalchemy_db as db
 
 about_naiyo_bp = Blueprint('about_naiyo', __name__)
 

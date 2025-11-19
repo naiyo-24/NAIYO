@@ -7,6 +7,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -33,22 +34,58 @@ export default function Contact() {
       });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+    try {
+      const res = await fetch(`${apiBaseUrl}/customer_query`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer_name: formData.name,
+          cust_email: formData.email,
+          cust_phone: formData.phone,
+          query_subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to submit query");
+      }
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      }, 3000);
+    } catch (err) {
+      alert("There was an error submitting your query. Please try again.");
+    }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name === "phone") {
+      // Only allow digits
+      const numericValue = value.replace(/[^0-9]/g, "");
+      setFormData({
+        ...formData,
+        [name]: numericValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   return (
@@ -144,12 +181,15 @@ export default function Contact() {
               </div>
 
               {/* Google Maps Embed */}
-              <div className="mt-12 rounded-lg overflow-hidden shadow-lg w-full border-2 border-gray-300">
+              <div
+                className="mt-12 rounded-lg overflow-hidden shadow-lg w-full border-2 border-gray-300 flex justify-center items-center"
+                style={{ minHeight: "700px" }}
+              >
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.486065788691!2d88.37561767505014!3d22.485939379553525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02711beb141767%3A0x38b172984d60419!2sNaiyo24%20Private%20Limited!5e0!3m2!1sen!2sin!4v1763460189459!5m2!1sen!2sin"
                   width="100%"
-                  height="620"
-                  style={{ border: 0, minHeight: "400px", maxHeight: "500px" }}
+                  height="700"
+                  style={{ border: 0, minHeight: "700px", maxHeight: "900px" }}
                   allowFullScreen={true}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -206,6 +246,28 @@ export default function Contact() {
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
                       placeholder="john@example.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-semibold mb-2"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      maxLength={12}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none"
+                      placeholder="91 00000 99999"
                     />
                   </div>
 
