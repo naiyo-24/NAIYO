@@ -1,0 +1,74 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    restart: always
+    env_file:
+      - naiyo_backend/.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - naiyo_net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+      - naiyo_backend/.env
+    environment:
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "False"
+      PGADMIN_CONFIG_WTF_CSRF_ENABLED: "False"
+      PGADMIN_CONFIG_WTF_CSRF_CHECK_DEFAULT: "False"
+      PGADMIN_CONFIG_PROXY_X_HOST_COUNT: "1"
+      PGADMIN_CONFIG_PROXY_X_FOR_COUNT: "1"
+      PGADMIN_CONFIG_PROXY_X_PROTO_COUNT: "1"
+    ports:
+      - "59155:80"
+    depends_on:
+      - db
+    networks:
+      - naiyo_net
+
+  backend:
+    build:
+      context: .
+      dockerfile: naiyo_backend/Dockerfile
+    restart: always
+    env_file:
+      - naiyo_backend/.env
+    ports:
+      - "59135:5010"
+    volumes:
+      - ./naiyo_backend/uploads:/app/uploads
+    depends_on:
+      - db
+    networks:
+      - naiyo_net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: always
+    ports:
+      - "59235:6173"
+    networks:
+      - naiyo_net
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: [ "sh", "-c", "npm ci --no-audit --no-fund && npm run build && npm run preview -- --host 0.0.0.0 --port 6173" ]
+
+volumes:
+  db_data:
+
+
+networks:
+  naiyo_net:
+    driver: bridge
+
+# docker-compose -p naiyo-website up --build -d
+# docker-compose -p naiyo-website down
+# docker-compose -p naiyo-website logs -f

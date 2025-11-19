@@ -1,0 +1,20 @@
+# Lightweight Node image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies first (better layer caching)
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund
+
+# Copy the rest of the source
+COPY . .
+
+# Expose Vite dev server and HMR ports
+EXPOSE 6173
+EXPOSE 24679
+
+# Run Vite dev server, binding to 0.0.0.0 for container access
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "6173"]
+
