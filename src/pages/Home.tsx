@@ -1,14 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Globe,
-  Smartphone,
-  ArrowRight,
-  Rocket,
-  Shield,
-  Clock,
-  Code,
-} from "lucide-react";
+import { Globe, Smartphone, Rocket, Shield, Clock, Code } from "lucide-react";
 import Button from "../components/Button";
 import StatCard from "../components/StatCard";
 import ServiceCard from "../components/ServiceCard";
@@ -240,14 +232,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="hidden md:block">
-                <div className="rounded-lg shadow-xl p-10">
-                  <img
-                    src="/assets/images/naiyo24_logo.jpeg"
-                    alt="Naiyo24 Logo"
-                    className="rounded-lg bg-white object-contain p-2 mx-auto"
-                    style={{ maxWidth: "500px", height: "auto" }}
-                  />
-                </div>
+                {/* <div className="rounded-lg shadow-xl p-10"> */}
+                <img
+                  src="/assets/images/naiyo_black_nobg.png"
+                  alt="Naiyo24 Logo"
+                  className="rounded-lg object-contain p-1 mx-auto"
+                  style={{ maxWidth: "1000px", height: "auto" }}
+                />
+                {/* </div> */}
               </div>
             </div>
           </div>

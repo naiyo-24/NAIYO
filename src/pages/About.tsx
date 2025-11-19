@@ -52,17 +52,43 @@ export default function About() {
       </section>
 
       {/* CEO's Message Section */}
-      <section className="bg-gradient-to-br from-gray-100 to-gray-300 py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-10">
+      <section className="relative bg-gradient-to-br from-gray-100 to-gray-300 py-20">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <svg
+            width="100%"
+            height="100%"
+            viewBox="0 0 900 400"
+            preserveAspectRatio="none"
+            style={{ position: "absolute", width: "100%", height: "100%" }}
+          >
+            <ellipse
+              cx="700"
+              cy="100"
+              rx="180"
+              ry="60"
+              fill="#e5e7eb"
+              opacity="0.22"
+            />
+            <ellipse
+              cx="200"
+              cy="300"
+              rx="120"
+              ry="40"
+              fill="#d1d5db"
+              opacity="0.15"
+            />
+          </svg>
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-10 relative z-10">
           <div className="flex-shrink-0">
             <div className="relative">
               <img
                 src="/assets/images/ceo.jpg"
                 alt="CEO & Founder"
-                className="rounded-2xl shadow-xl w-[280px] h-[340px] object-cover border-4 border-white"
+                className="rounded-2xl shadow-2xl w-[340px] h-[420px] object-cover border-4 border-white"
                 style={{ filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.18))" }}
               />
-              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-4 py-1 rounded-full shadow-lg">
+              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gray-600 to-black-500 text-white text-xs px-4 py-1 rounded-full shadow-lg font-semibold tracking-wide">
                 CEO &amp; Founder
               </span>
             </div>
@@ -71,45 +97,45 @@ export default function About() {
             <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900 text-center md:text-left">
               CEO's Message
             </h2>
-            {/* <div className="text-center md:text-left text-gray-500 mb-4 text-lg">
-              Leadership insights and vision for the future
-            </div> */}
-            <br />
-            <div className="bg-white rounded-2xl shadow-lg p-8 relative">
-              <div className="absolute -top-7 left-8 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center shadow">
-                <span className="text-3xl">&#8220;</span>
+            <br></br>
+            <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-10 relative border border-gray-200 w-full max-w-3xl mx-auto">
+              <div className="absolute -top-8 left-8 w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center shadow animate-bounce">
+                <span className="text-4xl text-gray-400">&#8220;</span>
               </div>
-              <p className="italic text-gray-700 mb-6 text-lg">
-                At Naiyo24, we believe in transforming ideas into reality
-                through innovation and technology. Our commitment to excellence
-                drives us to deliver solutions that make a difference in the
-                digital landscape.
+              <p className="italic text-gray-800 mb-6 text-lg leading-relaxed">
+                "Every great achievement begins with a bold vision. At Naiyo24,
+                we turn vision into reality—one innovation at a time. Our
+                journey is fueled by curiosity, creativity, and a relentless
+                drive to empower businesses in the digital era."
               </p>
-              <p className="text-gray-600 mb-6">
-                With over 5 years of experience in the IT industry, I've
-                witnessed the transformative power of technology. Our team at
-                Naiyo24 is dedicated to creating cutting-edge solutions that not
-                only meet our clients' needs but exceed their expectations. We
-                focus on building lasting partnerships and delivering value that
-                drives business growth.
+              <p className="text-gray-700 mb-6 text-base">
+                As CEO, I am proud to lead a team that values integrity,
+                collaboration, and excellence above all. We believe technology
+                is not just about code—it's about people, impact, and lasting
+                partnerships. Our mission is to help you grow, adapt, and thrive
+                in a world of constant change.
               </p>
-              <div className="absolute -bottom-7 right-8 w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center shadow">
-                <span className="text-3xl">&#8221;</span>
+              <p className="text-gray-600 mb-6 text-sm">
+                Thank you for trusting us with your dreams. Together, let's
+                build a future where innovation knows no bounds.
+              </p>
+              <div className="absolute -bottom-8 right-8 w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center shadow animate-bounce">
+                <span className="text-4xl text-gray-400">&#8221;</span>
               </div>
-              <div className="font-bold text-xl text-gray-900 mb-1">
+              <div className="font-bold text-xl text-gray-900 mb-1 mt-8">
                 Debasish Baidya
               </div>
               <div className="text-gray-700 font-medium mb-2">
                 CEO &amp; Founder, Naiyo24
               </div>
               <div className="text-gray-400 text-sm mb-4">
-                Technology enthusiast with a passion for innovation and digital
-                transformation
+                Technology enthusiast | Visionary leader | Digital
+                transformation advocate
               </div>
-              <div className="flex gap-4 mt-2">
+              <div className="flex gap-4 mt-2 justify-center md:justify-start">
                 <a
                   href="https://in.linkedin.com/company/naiyo24-official"
-                  className="text-gray-500 hover:text-gray-900"
+                  className="text-gray-400 hover:text-black"
                   aria-label="LinkedIn"
                 >
                   <svg
@@ -123,7 +149,7 @@ export default function About() {
                 </a>
                 <a
                   href="https://x.com"
-                  className="text-gray-500 hover:text-gray-900"
+                  className="text-gray-400 hover:text-black"
                   aria-label="X"
                 >
                   <svg
@@ -137,7 +163,7 @@ export default function About() {
                 </a>
                 <a
                   href="https://www.instagram.com/naiyo24_official/"
-                  className="text-gray-500 hover:text-gray-900"
+                  className="text-gray-400 hover:text-black"
                   aria-label="Instagram"
                 >
                   <svg
@@ -151,7 +177,7 @@ export default function About() {
                 </a>
                 <a
                   href="https://www.facebook.com/Naiyo24/"
-                  className="text-gray-500 hover:text-gray-900"
+                  className="text-gray-400 hover:text-black"
                   aria-label="Facebook"
                 >
                   <svg
