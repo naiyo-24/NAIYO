@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Button from "../components/Button";
+import apiBaseUrl from "../apiBaseUrl";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,8 +10,28 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-
   const [submitted, setSubmitted] = useState(false);
+
+  // AboutNaiyo API state
+  const [info, setInfo] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch(`${apiBaseUrl}/about_naiyo`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch contact info");
+        return res.json();
+      })
+      .then((data) => {
+        setInfo(data && data.length > 0 ? data[0] : null);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,46 +76,70 @@ export default function Contact() {
               </p>
 
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-gray-100 p-3 rounded-lg">
-                    <Mail size={24} className="text-black" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-gray-600">office@naiyo24.com</p>
-                  </div>
-                </div>
+                {loading ? (
+                  <div className="text-gray-600">Loading contact info...</div>
+                ) : error ? (
+                  <div className="text-red-500">{error}</div>
+                ) : info ? (
+                  <>
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gray-100 p-3 rounded-lg">
+                        <Mail size={24} className="text-black" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-1">Email</h3>
+                        <p className="text-gray-600">{info.email}</p>
+                      </div>
+                    </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="bg-gray-100 p-3 rounded-lg">
-                    <Phone size={24} className="text-black" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-gray-600">+91 6289171798</p>
-                  </div>
-                </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gray-100 p-3 rounded-lg">
+                        <Phone size={24} className="text-black" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-1">Phone</h3>
+                        <p className="text-gray-600">{info.phone}</p>
+                        {info.landline && (
+                          <p className="text-gray-600">
+                            Landline: {info.landline}
+                          </p>
+                        )}
+                      </div>
+                    </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="bg-gray-100 p-3 rounded-lg">
-                    <MapPin size={24} className="text-black" />
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-gray-100 p-3 rounded-lg">
+                        <MapPin size={24} className="text-black" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-1">Office</h3>
+                        <p className="text-gray-600">{info.address}</p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-gray-600">
+                    No contact info available.
                   </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Office</h3>
-                    <p className="text-gray-600">
-                      1/30 Chittaranjan Colony, Baghajatin
-                    </p>
-                    <p className="text-gray-600">Kolkata- 700032</p>
-                  </div>
-                </div>
+                )}
               </div>
 
               <div className="mt-12">
                 <h3 className="font-semibold mb-4">Business Hours</h3>
                 <div className="space-y-2 text-gray-600">
-                  <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  <p>Saturday: 10:00 AM - 4:00 PM</p>
-                  <p>Sunday: Closed</p>
+                  {loading ? (
+                    <p>Loading business hours...</p>
+                  ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                  ) : info && info.business_hours ? (
+                    info.business_hours
+                      .split("\n")
+                      .map((line: string, idx: number) => (
+                        <p key={idx}>{line}</p>
+                      ))
+                  ) : (
+                    <p>No business hours available.</p>
+                  )}
                 </div>
               </div>
 
