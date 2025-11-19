@@ -1,18 +1,46 @@
+import { useEffect, useState } from "react";
 import { Users, Target, Award, Lightbulb } from "lucide-react";
 import FeatureCard from "../components/FeatureCard";
+import apiBaseUrl from "../apiBaseUrl";
 
 export default function About() {
+  const [about, setAbout] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch(`${apiBaseUrl}/about_naiyo_about`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch about info");
+        return res.json();
+      })
+      .then((data) => {
+        setAbout(data && data.length > 0 ? data[0] : null);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="pt-16">
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl font-bold mb-6">About Naiyo24</h1>
-            <p className="text-xl text-gray-600">
-              We are a team of passionate professionals dedicated to delivering
-              exceptional digital solutions that drive business growth and
-              innovation.
-            </p>
+            {loading ? (
+              <p className="text-gray-600">Loading...</p>
+            ) : error ? (
+              <p className="text-red-500">{error}</p>
+            ) : about ? (
+              <>
+                <p className="text-lg text-gray-600 mb-2">{about.vision}</p>
+              </>
+            ) : (
+              <p className="text-gray-600">No about info available.</p>
+            )}
           </div>
         </div>
       </section>
@@ -22,23 +50,25 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold mb-6">Our Story</h2>
-              <p className="text-gray-600 mb-4">
-                Founded with a vision to transform businesses through
-                technology, Naiyo24 has grown from a small startup to a trusted
-                partner for companies worldwide. Our journey has been marked by
-                innovation, dedication, and a relentless pursuit of excellence.
-              </p>
-              <p className="text-gray-600 mb-4">
-                With over 200 successful projects and a 98% client satisfaction
-                rate, we've proven our ability to deliver results that matter.
-                Our team combines technical expertise with creative thinking to
-                solve complex business challenges.
-              </p>
-              <p className="text-gray-600">
-                Today, we continue to push boundaries, embracing new
-                technologies and methodologies to ensure our clients stay ahead
-                in the digital landscape.
-              </p>
+              {loading ? (
+                <p className="text-gray-600">Loading...</p>
+              ) : error ? (
+                <p className="text-red-500">{error}</p>
+              ) : about ? (
+                <>
+                  <p className="text-xl text-gray-600 mb-2">{about.about_us}</p>
+                  {/* <p className="text-lg text-gray-600 mb-2">
+                    <span className="font-semibold">Mission:</span>{" "}
+                    {about.mission}
+                  </p>
+                  <p className="text-lg text-gray-600 mb-2">
+                    <span className="font-semibold">Vision:</span>{" "}
+                    {about.vision}
+                  </p> */}
+                </>
+              ) : (
+                <p className="text-gray-600">No about info available.</p>
+              )}
             </div>
             <div>
               <img
@@ -52,7 +82,7 @@ export default function About() {
       </section>
 
       {/* CEO's Message Section */}
-      <section className="relative bg-gradient-to-br from-gray-100 to-gray-300 py-20">
+      <section className="relative bg-gradient-to-br from-gray-50 to-gray-200 py-20">
         <div className="absolute inset-0 pointer-events-none z-0">
           <svg
             width="100%"
@@ -99,31 +129,37 @@ export default function About() {
             </h2>
             <br></br>
             <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-10 relative border border-gray-200 w-full max-w-3xl mx-auto">
-              <div className="absolute -top-8 left-8 w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center shadow animate-bounce">
+              <div className="absolute -top-8 left-8 w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center shadow">
                 <span className="text-4xl text-gray-400">&#8220;</span>
               </div>
-              <p className="italic text-gray-800 mb-6 text-lg leading-relaxed">
-                "Every great achievement begins with a bold vision. At Naiyo24,
-                we turn vision into reality—one innovation at a time. Our
-                journey is fueled by curiosity, creativity, and a relentless
-                drive to empower businesses in the digital era."
-              </p>
-              <p className="text-gray-700 mb-6 text-base">
-                As CEO, I am proud to lead a team that values integrity,
-                collaboration, and excellence above all. We believe technology
-                is not just about code—it's about people, impact, and lasting
-                partnerships. Our mission is to help you grow, adapt, and thrive
-                in a world of constant change.
-              </p>
-              <p className="text-gray-600 mb-6 text-sm">
-                Thank you for trusting us with your dreams. Together, let's
-                build a future where innovation knows no bounds.
-              </p>
-              <div className="absolute -bottom-8 right-8 w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center shadow animate-bounce">
+              {loading ? (
+                <p className="italic text-gray-800 mb-6 text-lg leading-relaxed">
+                  Loading...
+                </p>
+              ) : error ? (
+                <p className="text-red-500 mb-6">{error}</p>
+              ) : about ? (
+                <>
+                  <p className="italic text-gray-800 mb-6 text-lg leading-relaxed">
+                    {about.ceo_message}
+                  </p>
+                  <p className="text-lg text-gray-600 mb-2">
+                    <span className="italic text-gray-800 mb-6 text-sm leading-relaxed">
+                      {" "}
+                      {about.mission}
+                    </span>
+                  </p>
+                  <div className="font-bold text-xl text-gray-900 mb-1 mt-8">
+                    {about.ceo_name}
+                  </div>
+                </>
+              ) : (
+                <p className="italic text-gray-800 mb-6 text-lg leading-relaxed">
+                  No CEO message available.
+                </p>
+              )}
+              <div className="absolute -bottom-8 right-8 w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center shadow">
                 <span className="text-4xl text-gray-400">&#8221;</span>
-              </div>
-              <div className="font-bold text-xl text-gray-900 mb-1 mt-8">
-                Debasish Baidya
               </div>
               <div className="text-gray-700 font-medium mb-2">
                 CEO &amp; Founder, Naiyo24
@@ -227,7 +263,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -246,7 +281,6 @@ export default function About() {
           </div>
         </div>
       </section>
-
       <section className="py-20 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Join Us on Our Journey</h2>

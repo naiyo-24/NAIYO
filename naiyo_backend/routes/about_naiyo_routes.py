@@ -1,4 +1,3 @@
-# routes/about_naiyo_routes.py
 # API endpoints for AboutNaiyo table
 from flask import Blueprint, request, jsonify
 from models.about_naiyo import db, AboutNaiyo
@@ -49,3 +48,32 @@ def create_about_naiyo():
 	db.session.add(new_record)
 	db.session.commit()
 	return jsonify({'message': 'Record created', 'id': new_record.id}), 201
+
+# GET only about_us, ceo_name, ceo_message, mission, vision
+@about_naiyo_bp.route('/about_naiyo_about', methods=['GET'])
+def get_about_naiyo_about():
+	records = AboutNaiyo.query.all()
+	result = [
+		{
+			'about_us': r.about_us,
+			'ceo_name': r.ceo_name,
+			'ceo_message': r.ceo_message,
+			'mission': r.mission,
+			'vision': r.vision
+		} for r in records
+	]
+	return jsonify(result)
+
+# GET only email, phone, address, business_hours
+@about_naiyo_bp.route('/about_naiyo_contact', methods=['GET'])
+def get_about_naiyo_contact():
+	records = AboutNaiyo.query.all()
+	result = [
+		{
+			'email': r.email,
+			'phone': r.phone,
+			'address': r.address,
+			'business_hours': r.business_hours
+		} for r in records
+	]
+	return jsonify(result)

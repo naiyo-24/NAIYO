@@ -18,7 +18,7 @@ export default function Contact() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`${apiBaseUrl}/about_naiyo`)
+    fetch(`${apiBaseUrl}/about_naiyo_contact`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch contact info");
         return res.json();
