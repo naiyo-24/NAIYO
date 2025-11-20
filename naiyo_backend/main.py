@@ -11,6 +11,7 @@ import logging
 from models.db import sqlalchemy_db as db
 from models.about_naiyo import AboutNaiyo
 from models.customer_query import CustomerQuery
+from models.partner_companies import PartnerCompanies
 
 # Ensure parent directory is in sys.path for imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -46,11 +47,12 @@ with app.app_context():
     except Exception as e:
         logging.error(f"Error creating tables: {e}")
 
-# Register blueprints
 from routes.about_naiyo_routes import about_naiyo_bp
 from routes.customer_query_routes import customer_query_bp
+from routes.partner_companies_routes import partner_companies_bp
 app.register_blueprint(about_naiyo_bp)
 app.register_blueprint(customer_query_bp)
+app.register_blueprint(partner_companies_bp)
 
 # Root route to verify backend is running
 @app.route('/')

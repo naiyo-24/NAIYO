@@ -108,13 +108,6 @@ export default function Home() {
       color: "#4ECDC4",
       website: "https://webii.com",
     },
-    {
-      initial: "I",
-      name: "added for test",
-      description: "Web Solutions",
-      color: "#4ECDC4",
-      website: "https://testpartner.com",
-    },
   ];
 
   return (
