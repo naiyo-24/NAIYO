@@ -1,4 +1,5 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import apiBaseUrl from "../apiBaseUrl";
 import { Link } from "react-router-dom";
 import { Globe, Smartphone, Rocket, Shield, Clock, Code } from "lucide-react";
 import Button from "../components/Button";
@@ -65,50 +66,25 @@ export default function Home() {
     };
   }, []);
 
-  const partners = [
-    {
-      initial: "N",
-      name: "Narii",
-      description: "Fashion & Lifestyle",
-      color: "#FF6B9D",
-      website: "https://narii.com",
-    },
-    {
-      initial: "S",
-      name: "Siri Bill",
-      description: "Payment Solutions",
-      color: "#C0D957",
-      website: "https://siribill.com",
-    },
-    {
-      initial: "L",
-      name: "Luriana 24",
-      description: "Digital Marketing",
-      color: "#5BC2E7",
-      website: "https://luriana24.com",
-    },
-    {
-      initial: "S",
-      name: "Startivo",
-      description: "Business Innovation",
-      color: "#FF9B50",
-      website: "https://startivo.com",
-    },
-    {
-      initial: "D",
-      name: "Digitezz",
-      description: "Digital Transformation",
-      color: "#DD6BDD",
-      website: "https://digitezz.com",
-    },
-    {
-      initial: "W",
-      name: "Webii",
-      description: "Web Solutions",
-      color: "#4ECDC4",
-      website: "https://webii.com",
-    },
-  ];
+  const [partners, setPartners] = useState<any[]>([]);
+  const [loadingPartners, setLoadingPartners] = useState(true);
+  const [partnersError, setPartnersError] = useState("");
+
+  useEffect(() => {
+    fetch(`${apiBaseUrl}/partner_companies`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch partner companies");
+        return res.json();
+      })
+      .then((data) => {
+        setPartners(data);
+        setLoadingPartners(false);
+      })
+      .catch((err) => {
+        setPartnersError(err.message);
+        setLoadingPartners(false);
+      });
+  }, []);
 
   return (
     <div className="pt-16">
@@ -275,11 +251,29 @@ export default function Home() {
               }}
             >
               <div className="flex gap-6 min-w-max pb-2">
-                {partners.map((partner) => (
-                  <div className="min-w-[220px]">
-                    <PartnerCard key={partner.name} {...partner} />
+                {loadingPartners ? (
+                  <div className="text-gray-600 px-4 py-8">
+                    Loading partner companies...
                   </div>
-                ))}
+                ) : partnersError ? (
+                  <div className="text-red-500 px-4 py-8">{partnersError}</div>
+                ) : partners.length > 0 ? (
+                  partners.map((partner) => (
+                    <div className="min-w-[220px]" key={partner.name}>
+                      <PartnerCard
+                        initial={partner.initial}
+                        name={partner.name}
+                        description={partner.short_desc}
+                        color={partner.color}
+                        website={partner.website}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-gray-600 px-4 py-8">
+                    No partner companies found.
+                  </div>
+                )}
               </div>
             </div>
             <button

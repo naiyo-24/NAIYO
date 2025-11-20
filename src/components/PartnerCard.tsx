@@ -13,9 +13,16 @@ export default function PartnerCard({
   color,
   website,
 }: PartnerCardProps) {
+  // Ensure website has protocol
+  const getWebsiteUrl = (url?: string) => {
+    if (!url) return undefined;
+    if (/^https?:\/\//i.test(url)) return url;
+    return `https://${url.replace(/^\/+/, "")}`;
+  };
+
   return (
     <a
-      href={website}
+      href={getWebsiteUrl(website)}
       target={website ? "_blank" : undefined}
       rel={website ? "noopener noreferrer" : undefined}
       className="block"
