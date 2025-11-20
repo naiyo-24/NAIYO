@@ -195,7 +195,7 @@ export default function Home() {
                   </Link>
                 </div>
                 <div className="grid grid-cols-3 gap-8 mt-12">
-                  <StatCard value="200+" label="Projects Completed" />
+                  <StatCard value="150+" label="Projects Completed" />
                   <StatCard value="98%" label="Client Satisfaction" />
                   <StatCard value="50+" label="Global Clients" />
                 </div>
