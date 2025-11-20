@@ -18,57 +18,53 @@ export default function Navbar() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <img
-              src="/assets/images/naiyo24_logo.jpeg"
-              alt="Naiyo24 Logo"
-              className="w-8 h-8 rounded-xl object-cover shadow-lg border border-gray-200"
-              style={{ boxShadow: "0 2px 12px 0 rgba(136, 136, 136, 0.08)" }}
-            />
-            <span className="text-xl font-bold text-black">Naiyo24</span>
-          </Link>
+    <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-white rounded-2xl shadow-xl border border-gray-200 px-6 py-2 w-[99vw] max-w-7xl flex items-center justify-between backdrop-blur-lg">
+      <Link to="/" className="flex items-center space-x-2">
+        <img
+          src="/assets/images/naiyo24_logo.jpeg"
+          alt="Naiyo24 Logo"
+          className="w-8 h-8 rounded-xl object-cover shadow-lg border border-gray-200"
+          style={{ boxShadow: "0 2px 12px 0 rgba(136, 136, 136, 0.08)" }}
+        />
+        <span className="text-xl font-bold text-black">Naiyo24</span>
+      </Link>
 
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="relative px-2 py-1 font-medium text-gray-700 hover:text-black transition-all duration-200"
-                onClick={
-                  item.scrollTop
-                    ? () => window.scrollTo({ top: 0, behavior: "smooth" })
-                    : undefined
-                }
-              >
-                <span>{item.name}</span>
-                {isActive(item.path) && (
-                  <span className="block w-full h-0.5 mt-1 bg-black rounded-full" />
-                )}
-              </Link>
-            ))}
-          </div>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-xl bg-gray-100 border border-gray-300 transition-all duration-200 hover:bg-gray-200"
+      <div className="hidden md:flex space-x-8">
+        {navItems.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className="relative px-3 py-1 font-medium text-gray-700 hover:text-black transition-all duration-200 rounded-xl"
+            onClick={
+              item.scrollTop
+                ? () => window.scrollTo({ top: 0, behavior: "smooth" })
+                : undefined
+            }
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+            <span>{item.name}</span>
+            {isActive(item.path) && (
+              <span className="block w-full h-0.5 mt-1 bg-black rounded-full" />
+            )}
+          </Link>
+        ))}
       </div>
 
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden p-2 rounded-xl bg-gray-100 border border-gray-300 transition-all duration-200 hover:bg-gray-200"
+      >
+        {isOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-xl">
+        <div className="absolute top-16 left-0 w-full bg-white rounded-b-2xl border-t border-gray-200 shadow-xl">
           <div className="px-4 py-3 space-y-3">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 font-medium text-gray-700 hover:text-black transition-all duration-200"
+                className="block px-3 py-2 font-medium text-gray-700 hover:text-black transition-all duration-200 rounded-xl"
               >
                 <span>{item.name}</span>
                 {isActive(item.path) && (

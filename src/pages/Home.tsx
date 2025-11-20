@@ -87,16 +87,30 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="pt-16">
-      <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 overflow-hidden">
-        {/* Animated Diagonal Grid Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className="relative">
+      <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 pt-0 pb-20 overflow-hidden min-h-[700px]">
+        {/* Animated Diagonal Grid Background - expanded to top */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            minHeight: "700px",
+          }}
+        >
           <svg
             width="100%"
             height="100%"
-            viewBox="0 0 1440 600"
+            viewBox="0 0 1440 700"
             preserveAspectRatio="none"
-            style={{ position: "absolute", width: "100%", height: "100%" }}
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              minHeight: "700px",
+            }}
           >
             {[...Array(20)].map((_, i) => (
               <line
@@ -162,11 +176,14 @@ export default function Home() {
             ))}
           </svg>
         </div>
-        <div className="relative z-10">
+        <div className="relative z-10 pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="text-5xl md:text-8xl font-bold mb-6 leading-tight">
+                  Naiyo24 Pvt. Ltd.
+                </h1>
+                <h1 className="text-5xl md:text-3xl font-bold mb-6 leading-tight">
                   Transform Your Business with{" "}
                   <span className="italic">Digital Excellence</span>
                 </h1>
