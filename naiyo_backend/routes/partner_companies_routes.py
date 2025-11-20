@@ -8,7 +8,7 @@ def get_partner_companies():
 	records = PartnerCompanies.query.all()
 	result = [
 		{
-			'initial': r.Initials,
+			'initial': r.initials,
 			'name': r.name,
 			'short_desc': r.short_desc,
 			'color': r.color,
