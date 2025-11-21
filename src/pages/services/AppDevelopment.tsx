@@ -1,9 +1,34 @@
-import { Smartphone, Apple, Chrome, Zap, Users, Shield } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import SubServiceCard from "../../components/SubServiceCard";
+import apiBaseUrl from "../../apiBaseUrl";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
-import FeatureCard from "../../components/FeatureCard";
 
 export default function MobileApplications() {
+  const [subServices, setSubServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchSubServices() {
+      try {
+        setLoading(true);
+        setError(null);
+        const apiUrl = `${apiBaseUrl}/service_master_mobile-application-services`;
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("Failed to fetch sub services");
+        const data = await res.json();
+        setSubServices(data);
+      } catch (err: any) {
+        setError(err.message || "Unknown error");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSubServices();
+  }, []);
+
   return (
     <div className="pt-16">
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
@@ -41,37 +66,51 @@ export default function MobileApplications() {
               business growth.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={<Apple size={40} className="text-black" />}
-              title="iOS Development"
-              description="Native iOS apps built with Swift for optimal performance on iPhones and iPads."
-            />
-            <FeatureCard
-              icon={<Chrome size={40} className="text-black" />}
-              title="Android Development"
-              description="Native Android apps using Kotlin for seamless experience on all Android devices."
-            />
-            <FeatureCard
-              icon={<Smartphone size={40} className="text-black" />}
-              title="Cross-Platform"
-              description="Single codebase for both iOS and Android using React Native or Flutter."
-            />
-            <FeatureCard
-              icon={<Zap size={40} className="text-black" />}
-              title="High Performance"
-              description="Optimized for speed and efficiency to provide smooth user experience."
-            />
-            <FeatureCard
-              icon={<Users size={40} className="text-black" />}
-              title="User-Centric Design"
-              description="Intuitive interfaces designed with your users in mind for maximum engagement."
-            />
-            <FeatureCard
-              icon={<Shield size={40} className="text-black" />}
-              title="Secure & Scalable"
-              description="Built with security best practices and designed to grow with your business."
-            />
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {loading ? (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                Loading sub services...
+              </div>
+            ) : error ? (
+              <div className="col-span-full text-center text-red-500 py-8">
+                {error}
+              </div>
+            ) : subServices.length === 0 ? (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                No sub services found.
+              </div>
+            ) : (
+              subServices.map((service, idx) => {
+                // Dynamic Lucide icon rendering (ESM safe)
+                const iconName =
+                  service.service_logo &&
+                  typeof service.service_logo === "string"
+                    ? service.service_logo.trim()
+                    : "Monitor";
+                const LucideIcon =
+                  (
+                    LucideIcons as unknown as Record<
+                      string,
+                      React.ComponentType<{ size?: number; className?: string }>
+                    >
+                  )[iconName] || LucideIcons.Monitor;
+                return (
+                  <SubServiceCard
+                    key={service.service_id || idx}
+                    icon={<LucideIcon size={32} className="text-black" />}
+                    subService={
+                      service.sub_service ||
+                      service.main_service ||
+                      "Mobile Service"
+                    }
+                    shortDesc={service.short_desc}
+                    longDesc={service.long_desc}
+                    serviceCharge={service.service_charge}
+                    className="min-h-[220px]"
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </section>
