@@ -3,7 +3,7 @@ import SubServiceCard from "../../components/SubServiceCard";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import apiBaseUrl from "../../apiBaseUrl";
-
+import PricingCard, { PricingPlan } from "../../components/PricingCard";
 import { useEffect, useState } from "react";
 
 export default function WebApplications() {
@@ -29,6 +29,53 @@ export default function WebApplications() {
     }
     fetchSubServices();
   }, []);
+
+  // Dummy pricing data
+  const pricingPlans: PricingPlan[] = [
+    {
+      name: "Basic",
+      price: "$499",
+      features: [
+        { label: "Responsive Design", available: true },
+        { label: "SEO Basics", available: true },
+        { label: "Contact Form", available: true },
+        { label: "Up to 5 Pages", available: true },
+        { label: "E-commerce", available: false },
+        { label: "Analytics Setup", available: false },
+      ],
+      buttonText: "Get Started",
+      buttonUrl: "/contact",
+    },
+    {
+      name: "Professional",
+      price: "$999",
+      features: [
+        { label: "Responsive Design", available: true },
+        { label: "Advanced SEO", available: true },
+        { label: "Contact Form", available: true },
+        { label: "Up to 15 Pages", available: true },
+        { label: "E-commerce", available: true },
+        { label: "Analytics Setup", available: true },
+      ],
+      popular: true,
+      buttonText: "Get Started",
+      buttonUrl: "/contact",
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      features: [
+        { label: "Unlimited Pages", available: true },
+        { label: "Custom Features", available: true },
+        { label: "API Integrations", available: true },
+        { label: "Advanced Security", available: true },
+        { label: "Priority Support", available: true },
+        { label: "Dedicated Manager", available: true },
+      ],
+      buttonText: "Contact Us",
+      buttonUrl: "/contact",
+    },
+  ];
 
   return (
     <div className="pt-0">
@@ -112,6 +159,11 @@ export default function WebApplications() {
             )}
           </div>
         </div>
+      </section>
+
+      {/* PricingCard Section - Inserted below main service section */}
+      <section className="py-20">
+        <PricingCard plans={pricingPlans} />
       </section>
 
       <section className="py-20 bg-gray-50">
