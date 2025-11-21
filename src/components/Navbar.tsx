@@ -10,7 +10,7 @@ export default function Navbar() {
     { name: "Home", path: "/", scrollTop: true },
     { name: "About", path: "/about", scrollTop: true },
     { name: "Services", path: "/services", scrollTop: true },
-    { name: "Pricing", path: "/pricing", scrollTop: true },
+    { name: "Careers", path: "/careers", scrollTop: true },
     { name: "Testimonials", path: "/testimonials", scrollTop: true },
     { name: "Contact", path: "/contact", scrollTop: true },
   ];

@@ -45,40 +45,96 @@ export default function Services() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* ...existing ServiceCard components... */}
-            <ServiceCard
-              icon={<Globe size={40} className="text-black" />}
-              title="Web Development"
-              description="Custom websites that convert visitors into customers with SEO optimization."
-              link="/services/web-applications"
-            />
-            <ServiceCard
-              icon={<Smartphone size={40} className="text-black" />}
-              title="Mobile Applications"
-              description="Native and cross-platform mobile solutions for iOS and Android with seamless performance."
-              link="/services/mobile-applications"
-            />
-            <ServiceCard
-              icon={<Monitor size={40} className="text-black" />}
-              title="Desktop Applications"
-              description="Powerful desktop software solutions for Windows, macOS, and Linux platforms."
-              link="/services/desktop-applications"
-            />
-            <ServiceCard
-              icon={<Database size={40} className="text-black" />}
-              title="Database Solutions"
-              description="Scalable and secure database design, implementation, and optimization services."
-            />
-            <ServiceCard
-              icon={<Cloud size={40} className="text-black" />}
-              title="Cloud Services"
-              description="Cloud infrastructure setup, migration, and management for optimal performance."
-            />
-            <ServiceCard
-              icon={<Palette size={40} className="text-black" />}
-              title="UI/UX Design"
-              description="Beautiful and intuitive user interfaces that enhance user experience and engagement."
-            />
+            {/* Dynamically render service cards from src/pages/services */}
+            {[
+              {
+                title: "Web Development",
+                description:
+                  "Custom websites that convert visitors into customers with SEO optimization.",
+                link: "/services/web-applications",
+                icon: <Globe size={40} className="text-black" />,
+              },
+              {
+                title: "Mobile Applications",
+                description:
+                  "Native and cross-platform mobile solutions for iOS and Android with seamless performance.",
+                link: "/services/mobile-applications",
+                icon: <Smartphone size={40} className="text-black" />,
+              },
+              {
+                title: "Servers & Hosting",
+                description:
+                  "Reliable server setup, cloud hosting, and infrastructure management for your business.",
+                link: "/services/servers-and-hosting",
+                icon: <Monitor size={40} className="text-black" />,
+              },
+              {
+                title: "Professional Email",
+                description:
+                  "Branded professional email solutions to enhance your business credibility.",
+                link: "/services/professional-email",
+                icon: <Database size={40} className="text-black" />,
+              },
+              {
+                title: "Domain Registration",
+                description:
+                  "Secure your online identity with our hassle-free domain registration services.",
+                link: "/services/domain-registration",
+                icon: <Cloud size={40} className="text-black" />,
+              },
+              {
+                title: "Marketing",
+                description:
+                  "Grow your business with our comprehensive marketing solutions, including digital campaigns and social media management.",
+                link: "/services/marketing",
+                icon: <Palette size={40} className="text-black" />,
+              },
+              {
+                title: "Business Solution",
+                description:
+                  "Optimize your operations with our tailored business solutions, including process automation, ERP, and CRM systems.",
+                link: "/services/business-solution",
+                icon: <Monitor size={40} className="text-black" />,
+              },
+              {
+                title: "Logo & Branding",
+                description:
+                  "Build a memorable brand identity with our logo design and branding services.",
+                link: "/services/logo-branding",
+                icon: <Palette size={40} className="text-black" />,
+              },
+              {
+                title: "Company Incorporation",
+                description:
+                  "Start your business journey with our company incorporation services, ensuring legal compliance and smooth registration.",
+                link: "/services/company-incorporation",
+                icon: <Database size={40} className="text-black" />,
+              },
+              {
+                title: "SEO",
+                description:
+                  "Boost your online visibility and rankings with our expert SEO services.",
+                link: "/services/seo",
+                icon: <Database size={40} className="text-black" />,
+              },
+              {
+                title: "Market Research",
+                description:
+                  "Make informed decisions with our market research services, providing actionable insights and data-driven strategies.",
+                link: "/services/market-research",
+                icon: <Globe size={40} className="text-black" />,
+              },
+            ].map((service, idx) => (
+              <div className="h-full min-h-[340px] flex">
+                <ServiceCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                  link={service.link}
+                  className="h-full min-h-[340px] flex flex-col justify-between"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
