@@ -1,10 +1,35 @@
-import { Globe, Zap, Search, Shield, Smartphone, Code } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import SubServiceCard from "../../components/SubServiceCard";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
-import FeatureCard from "../../components/FeatureCard";
-import SubServiceCard from "../../components/SubServiceCard";
+import apiBaseUrl from "../../apiBaseUrl";
+
+import { useEffect, useState } from "react";
 
 export default function WebApplications() {
+  const [subServices, setSubServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchSubServices() {
+      try {
+        setLoading(true);
+        setError(null);
+        const apiUrl = `${apiBaseUrl}/service_master_web-development-services`;
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("Failed to fetch sub services");
+        const data = await res.json();
+        setSubServices(data);
+      } catch (err: any) {
+        setError(err.message || "Unknown error");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSubServices();
+  }, []);
+
   return (
     <div className="pt-0">
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-[calc(100vh-0px)] flex items-center">
@@ -41,38 +66,50 @@ export default function WebApplications() {
             </p>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <SubServiceCard
-              title="Landing Pages"
-              description="High-converting, fast-loading landing pages for campaigns and products."
-            />
-            <SubServiceCard
-              title="E-Commerce"
-              description="Custom online stores with secure payments and inventory management."
-            />
-            <SubServiceCard
-              title="Blog Integration"
-              description="SEO-friendly blog setup for content marketing and engagement."
-            />
-            <SubServiceCard
-              title="CMS Solutions"
-              description="Easy-to-manage content systems tailored to your business needs."
-            />
-            <SubServiceCard
-              title="API Integration"
-              description="Connect your site to third-party services and automate workflows."
-            />
-            <SubServiceCard
-              title="Analytics Setup"
-              description="Track user behavior and site performance with advanced analytics."
-            />
-            <SubServiceCard
-              title="Maintenance & Support"
-              description="Ongoing updates, backups, and technical support for peace of mind."
-            />
-            <SubServiceCard
-              title="Performance Audits"
-              description="Comprehensive site reviews to boost speed, security, and SEO."
-            />
+            {loading ? (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                Loading sub services...
+              </div>
+            ) : error ? (
+              <div className="col-span-full text-center text-red-500 py-8">
+                {error}
+              </div>
+            ) : subServices.length === 0 ? (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                No sub services found.
+              </div>
+            ) : (
+              subServices.map((service, idx) => {
+                // Dynamic Lucide icon rendering (ESM safe)
+                const iconName =
+                  service.service_logo &&
+                  typeof service.service_logo === "string"
+                    ? service.service_logo.trim()
+                    : "Monitor";
+                const LucideIcon =
+                  (
+                    LucideIcons as unknown as Record<
+                      string,
+                      React.ComponentType<{ size?: number; className?: string }>
+                    >
+                  )[iconName] || LucideIcons.Monitor;
+                return (
+                  <SubServiceCard
+                    key={service.service_id || idx}
+                    icon={<LucideIcon size={32} className="text-black" />}
+                    subService={
+                      service.sub_service ||
+                      service.main_service ||
+                      "Web Service"
+                    }
+                    shortDesc={service.short_desc}
+                    longDesc={service.long_desc}
+                    serviceCharge={service.service_charge}
+                    className="min-h-[220px]"
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </section>
