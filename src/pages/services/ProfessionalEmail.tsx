@@ -1,127 +1,115 @@
-import { Check } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+import SubServiceCard from "../../components/SubServiceCard";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
+import apiBaseUrl from "../../apiBaseUrl";
+import { useEffect, useState } from "react";
 
-export default function Pricing() {
-  const plans = [
-    {
-      name: "Starter",
-      price: "$999",
-      description: "Perfect for small businesses and startups",
-      features: [
-        "Basic website (up to 5 pages)",
-        "Responsive design",
-        "Contact form",
-        "SEO basics",
-        "30 days support",
-        "Source code included",
-      ],
-    },
-    {
-      name: "Professional",
-      price: "$2,499",
-      description: "Ideal for growing businesses",
-      features: [
-        "Advanced website (up to 15 pages)",
-        "Custom design",
-        "CMS integration",
-        "Advanced SEO",
-        "E-commerce functionality",
-        "90 days support",
-        "Analytics setup",
-        "Source code included",
-      ],
-      popular: true,
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      description: "For large-scale projects",
-      features: [
-        "Unlimited pages",
-        "Custom features",
-        "API integrations",
-        "Advanced security",
-        "Performance optimization",
-        "Priority support",
-        "Dedicated project manager",
-        "Full documentation",
-      ],
-    },
-  ];
+export default function ProfessionalEmail() {
+  const [subServices, setSubServices] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchSubServices() {
+      try {
+        setLoading(true);
+        setError(null);
+        const apiUrl = `${apiBaseUrl}/service_master_professional-email-services`;
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("Failed to fetch sub services");
+        const data = await res.json();
+        setSubServices(data);
+      } catch (err: any) {
+        setError(err.message || "Unknown error");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchSubServices();
+  }, []);
 
   return (
     <div className="pt-16">
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Pricing Plans</h1>
-            <p className="text-xl text-gray-600">
-              Choose the perfect plan for your business needs. All plans include
-              our premium quality and support.
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-5xl font-bold mb-6">Professional Email</h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Enhance your professional image with our reliable and secure
+                email solutions, tailored to meet your business needs.
+              </p>
+              <Link to="/contact">
+                <Button variant="primary">Start Your Project</Button>
+              </Link>
+            </div>
+            <div>
+              <img
+                src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Professional Email"
+                className="rounded-lg shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`bg-white rounded-lg shadow-lg p-8 ${
-                  plan.popular ? "ring-2 ring-black transform scale-105" : ""
-                }`}
-              >
-                {plan.popular && (
-                  <div className="bg-black text-white text-sm font-semibold px-3 py-1 rounded-full inline-block mb-4">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.price !== "Custom" && (
-                    <span className="text-gray-600">/project</span>
-                  )}
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <Check
-                        size={20}
-                        className="text-green-500 mr-2 mt-0.5 flex-shrink-0"
-                      />
-                      <span className="text-gray-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link to="/contact">
-                  <Button
-                    variant={plan.popular ? "primary" : "outline"}
-                    className="w-full justify-center"
-                  >
-                    Get Started
-                  </Button>
-                </Link>
-              </div>
-            ))}
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold mb-4">What We Offer</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive professional email services to help your business
+              thrive online.
+            </p>
           </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Need a Custom Solution?</h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Every project is unique. Contact us to discuss your specific
-            requirements and get a tailored quote.
-          </p>
-          <Link to="/contact">
-            <Button variant="primary">Contact Us</Button>
-          </Link>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {loading ? (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                Loading sub services...
+              </div>
+            ) : error ? (
+              <div className="col-span-full text-center text-red-500 py-8">
+                {error}
+              </div>
+            ) : subServices.length === 0 ? (
+              <div className="col-span-full text-center text-gray-500 py-8">
+                No sub services found.
+              </div>
+            ) : (
+              subServices.map((service, idx) => {
+                // Dynamic Lucide icon rendering (ESM safe)
+                const iconName =
+                  service.service_logo &&
+                  typeof service.service_logo === "string"
+                    ? service.service_logo.trim()
+                    : "Monitor";
+                const LucideIcon =
+                  (
+                    LucideIcons as unknown as Record<
+                      string,
+                      React.ComponentType<{ size?: number; className?: string }>
+                    >
+                  )[iconName] || LucideIcons.Monitor;
+                return (
+                  <SubServiceCard
+                    key={service.service_id || idx}
+                    icon={<LucideIcon size={32} className="text-black" />}
+                    subService={
+                      service.sub_service ||
+                      service.main_service ||
+                      "Professional Email Service"
+                    }
+                    shortDesc={service.short_desc}
+                    longDesc={service.long_desc}
+                    serviceCharge={service.service_charge}
+                    className="min-h-[220px]"
+                  />
+                );
+              })
+            )}
+          </div>
         </div>
       </section>
     </div>
