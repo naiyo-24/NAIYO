@@ -2,13 +2,14 @@ import { Globe, Zap, Search, Shield, Smartphone, Code } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import FeatureCard from "../../components/FeatureCard";
+import SubServiceCard from "../../components/SubServiceCard";
 
 export default function WebApplications() {
   return (
-    <div className="pt-16">
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+    <div className="pt-0">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-[calc(100vh-0px)] flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center w-full">
             <div>
               <h1 className="text-5xl font-bold mb-6">Web Development</h1>
               <p className="text-xl text-gray-600 mb-8">
@@ -32,43 +33,45 @@ export default function WebApplications() {
 
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-4xl font-bold mb-4">What We Offer</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Comprehensive web development services to help your business
               thrive online.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={<Globe size={40} className="text-black" />}
-              title="Responsive Design"
-              description="Your website will look perfect on all devices, from smartphones to desktops."
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <SubServiceCard
+              title="Landing Pages"
+              description="High-converting, fast-loading landing pages for campaigns and products."
             />
-            <FeatureCard
-              icon={<Zap size={40} className="text-black" />}
-              title="Fast Performance"
-              description="Optimized for speed to keep your visitors engaged and improve rankings."
+            <SubServiceCard
+              title="E-Commerce"
+              description="Custom online stores with secure payments and inventory management."
             />
-            <FeatureCard
-              icon={<Search size={40} className="text-black" />}
-              title="SEO Optimized"
-              description="Built with search engines in mind to help you rank higher in search results."
+            <SubServiceCard
+              title="Blog Integration"
+              description="SEO-friendly blog setup for content marketing and engagement."
             />
-            <FeatureCard
-              icon={<Shield size={40} className="text-black" />}
-              title="Secure & Reliable"
-              description="Industry-standard security practices to protect your site and user data."
+            <SubServiceCard
+              title="CMS Solutions"
+              description="Easy-to-manage content systems tailored to your business needs."
             />
-            <FeatureCard
-              icon={<Smartphone size={40} className="text-black" />}
-              title="Mobile-First"
-              description="Designed for mobile users first, then enhanced for larger screens."
+            <SubServiceCard
+              title="API Integration"
+              description="Connect your site to third-party services and automate workflows."
             />
-            <FeatureCard
-              icon={<Code size={40} className="text-black" />}
-              title="Clean Code"
-              description="Well-structured, maintainable code that's easy to update and scale."
+            <SubServiceCard
+              title="Analytics Setup"
+              description="Track user behavior and site performance with advanced analytics."
+            />
+            <SubServiceCard
+              title="Maintenance & Support"
+              description="Ongoing updates, backups, and technical support for peace of mind."
+            />
+            <SubServiceCard
+              title="Performance Audits"
+              description="Comprehensive site reviews to boost speed, security, and SEO."
             />
           </div>
         </div>
