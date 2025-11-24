@@ -7,10 +7,17 @@ import PricingCard, { PricingPlan } from "../../components/PricingCard";
 import { useEffect, useState } from "react";
 
 export default function WebApplications() {
+  // State for sub-services
   const [subServices, setSubServices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // State for pricing plans
+  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([]);
+  const [pricingLoading, setPricingLoading] = useState(true);
+  const [pricingError, setPricingError] = useState<string | null>(null);
+
+  // Fetch sub-services
   useEffect(() => {
     async function fetchSubServices() {
       try {
@@ -30,52 +37,54 @@ export default function WebApplications() {
     fetchSubServices();
   }, []);
 
-  // Dummy pricing data
-  const pricingPlans: PricingPlan[] = [
-    {
-      name: "Basic",
-      price: "$499",
-      features: [
-        { label: "Responsive Design", available: true },
-        { label: "SEO Basics", available: true },
-        { label: "Contact Form", available: true },
-        { label: "Up to 5 Pages", available: true },
-        { label: "E-commerce", available: false },
-        { label: "Analytics Setup", available: false },
-      ],
-      buttonText: "Get Started",
-      buttonUrl: "/contact",
-    },
-    {
-      name: "Professional",
-      price: "$999",
-      features: [
-        { label: "Responsive Design", available: true },
-        { label: "Advanced SEO", available: true },
-        { label: "Contact Form", available: true },
-        { label: "Up to 15 Pages", available: true },
-        { label: "E-commerce", available: true },
-        { label: "Analytics Setup", available: true },
-      ],
-      popular: true,
-      buttonText: "Get Started",
-      buttonUrl: "/contact",
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      features: [
-        { label: "Unlimited Pages", available: true },
-        { label: "Custom Features", available: true },
-        { label: "API Integrations", available: true },
-        { label: "Advanced Security", available: true },
-        { label: "Priority Support", available: true },
-        { label: "Dedicated Manager", available: true },
-      ],
-      buttonText: "Contact Us",
-      buttonUrl: "/contact",
-    },
-  ];
+  // Fetch pricing plans from backend API
+  useEffect(() => {
+    async function fetchPricingPlans() {
+      try {
+        setPricingLoading(true);
+        setPricingError(null);
+        // Fetch pricing data for 'Web Development Services'
+        const apiUrl = `${apiBaseUrl}/pricing_master_web-development-services`;
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("Failed to fetch pricing data");
+        const data = await res.json();
+
+        // Transform backend data to PricingPlan[]
+        // Each service_pack_X is expected to be a JSON object with name, price, features, etc.
+        if (Array.isArray(data) && data.length > 0) {
+          const packs: PricingPlan[] = [];
+          const record = data[0]; // Assuming only one record for 'Web Development Services'
+          for (let i = 1; i <= 9; i++) {
+            const pack = record[`service_pack_${i}`];
+            if (pack && typeof pack === "object" && pack.name) {
+              packs.push({
+                name: pack.name,
+                price: pack.price,
+                features: Array.isArray(pack.features)
+                  ? pack.features.map((f: any) => ({
+                      label: f.label,
+                      available: !!f.available,
+                    }))
+                  : [],
+                popular: !!pack.popular,
+                buttonText: pack.buttonText || "Get Started",
+                buttonUrl: pack.buttonUrl || "/contact",
+              });
+            }
+          }
+          setPricingPlans(packs);
+        } else {
+          setPricingPlans([]);
+        }
+      } catch (err: any) {
+        setPricingError(err.message || "Unknown error");
+        setPricingPlans([]);
+      } finally {
+        setPricingLoading(false);
+      }
+    }
+    fetchPricingPlans();
+  }, []);
 
   return (
     <div className="pt-0">
@@ -161,9 +170,21 @@ export default function WebApplications() {
         </div>
       </section>
 
-      {/* PricingCard Section - Inserted below main service section */}
+      {/* PricingCard Section - Real-time data from backend */}
       <section className="py-20">
-        <PricingCard plans={pricingPlans} />
+        {pricingLoading ? (
+          <div className="text-center text-gray-500 py-8">
+            Loading pricing...
+          </div>
+        ) : pricingError ? (
+          <div className="text-center text-red-500 py-8">{pricingError}</div>
+        ) : pricingPlans.length === 0 ? (
+          <div className="text-center text-gray-500 py-8">
+            No pricing plans found.
+          </div>
+        ) : (
+          <PricingCard plans={pricingPlans} />
+        )}
       </section>
 
       <section className="py-20 bg-gray-50">
