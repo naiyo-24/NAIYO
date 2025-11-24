@@ -1,56 +1,43 @@
 import TestimonialCard from "../components/TestimonialCard";
+import { useEffect, useState } from "react";
+import apiBaseUrl from "../apiBaseUrl";
+
+type Testimonial = {
+  id?: number;
+  name: string;
+  role?: string;
+  company?: string;
+  content: string;
+  rating?: number;
+};
 
 export default function Testimonials() {
-  const testimonials = [
-    {
-      name: "Sourav Chatterjee",
-      role: "Shop Owner",
-      company: "Chatterjee Electronics",
-      content:
-        "Naiyo24 made a website for my shop in Kolkata. The team was very helpful and explained everything in Bengali. My customers find it easy to use.",
-      rating: 5,
-    },
-    {
-      name: "Moumita Dey",
-      role: "Private Tutor",
-      company: "Dey Coaching Centre",
-      content:
-        "I wanted an online portal for my students. Naiyo24 built it quickly and it works great. The support team is very polite and responsive.",
-      rating: 5,
-    },
-    {
-      name: "Arindam Ghosh",
-      role: "Freelance Designer",
-      company: "Ghosh Creations",
-      content:
-        "My portfolio site looks amazing now. Naiyo24 understood my ideas and made it better. Highly recommend for creative people.",
-      rating: 5,
-    },
-    {
-      name: "Rituparna Banerjee",
-      role: "Startup Owner",
-      company: "Banerjee Solutions",
-      content:
-        "We got our first app built by Naiyo24. The process was smooth and the team was always available for questions. Will work with them again.",
-      rating: 5,
-    },
-    {
-      name: "Subhajit Sen",
-      role: "School Teacher",
-      company: "Sen Academy",
-      content:
-        "Naiyo24 created a website for my coaching classes. The students and parents find it very useful. Good job by the team!",
-      rating: 5,
-    },
-    {
-      name: "Piyali Mukherjee",
-      role: "Bakery Owner",
-      company: "Mukherjee Sweets",
-      content:
-        "I wanted a simple app for my bakery. Naiyo24 delivered exactly what I needed and explained everything in Bengali. Very happy with the service.",
-      rating: 5,
-    },
-  ];
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        setLoading(true);
+        setError(null);
+        const res = await fetch(`${apiBaseUrl}/get_testimonials`);
+        if (!res.ok) throw new Error("Failed to fetch testimonials");
+        const data = await res.json();
+        setTestimonials(Array.isArray(data) ? data : []);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unknown error");
+        }
+        setTestimonials([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchTestimonials();
+  }, []);
 
   return (
     <div className="pt-16">
@@ -68,11 +55,30 @@ export default function Testimonials() {
 
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard key={testimonial.name} {...testimonial} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center text-gray-500 py-8">
+              Loading testimonials...
+            </div>
+          ) : error ? (
+            <div className="text-center text-red-500 py-8">{error}</div>
+          ) : testimonials.length === 0 ? (
+            <div className="text-center text-gray-500 py-8">
+              No testimonials found.
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id ?? testimonial.name}
+                  name={testimonial.name}
+                  role={testimonial.role ?? ""}
+                  company={testimonial.company ?? ""}
+                  content={testimonial.content}
+                  rating={testimonial.rating ?? 0}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

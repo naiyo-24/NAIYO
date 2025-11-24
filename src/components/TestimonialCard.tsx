@@ -1,4 +1,4 @@
-import { Star } from 'lucide-react';
+import { Star } from "lucide-react";
 
 interface TestimonialCardProps {
   name: string;
@@ -8,11 +8,22 @@ interface TestimonialCardProps {
   rating: number;
 }
 
-export default function TestimonialCard({ name, role, company, content, rating }: TestimonialCardProps) {
+export default function TestimonialCard({
+  name,
+  role,
+  company,
+  content,
+  rating,
+}: TestimonialCardProps) {
+  // Ensure rating is a valid positive integer between 0 and 5
+  const safeRating = Math.max(
+    0,
+    Math.min(5, Number.isFinite(rating) ? Math.floor(rating) : 0)
+  );
   return (
     <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
       <div className="flex mb-4">
-        {[...Array(rating)].map((_, i) => (
+        {[...Array(safeRating)].map((_, i) => (
           <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
         ))}
       </div>
