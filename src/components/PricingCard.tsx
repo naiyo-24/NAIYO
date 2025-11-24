@@ -16,6 +16,7 @@ export interface PricingPlan {
   popular?: boolean;
   buttonText?: string;
   buttonUrl?: string;
+  onClick?: () => void;
 }
 
 interface PricingCardProps {
@@ -144,6 +145,7 @@ export default function PricingCard({
                 <Button
                   variant={plan.popular ? "primary" : "outline"}
                   className="w-full justify-center"
+                  onClick={plan.onClick}
                 >
                   {plan.buttonText ||
                     (plan.price === "Custom" ? "Contact Us" : "Get Started")}

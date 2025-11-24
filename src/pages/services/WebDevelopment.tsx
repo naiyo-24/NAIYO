@@ -183,7 +183,23 @@ export default function WebApplications() {
             No pricing plans found.
           </div>
         ) : (
-          <PricingCard plans={pricingPlans} />
+          <PricingCard
+            plans={pricingPlans.map((plan) => {
+              const buttonText =
+                plan.price === "Custom" ? "Contact Us" : "Get Started";
+              return {
+                ...plan,
+                buttonText,
+                buttonUrl:
+                  buttonText === "Contact Us"
+                    ? "/contact"
+                    : `/service-requirement-form?serviceType=Web Development Services`,
+                onClick: () => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                },
+              };
+            })}
+          />
         )}
       </section>
 

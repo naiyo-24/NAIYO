@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Button from "../components/Button";
 import theme from "../theme";
 import apiBaseUrl from "../apiBaseUrl";
@@ -24,13 +25,17 @@ export default function ServiceRequirementForm() {
     }
     fetchServiceOptions();
   }, []);
+  // Get serviceType from query params
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const serviceTypeParam = queryParams.get("serviceType") || "";
   // Form state
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
-    serviceType: "",
+    serviceType: serviceTypeParam,
     budget: "",
     timeline: "",
     description: "",
