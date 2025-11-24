@@ -186,7 +186,7 @@ export default function WebApplications() {
           <PricingCard
             plans={pricingPlans.map((plan) => {
               const buttonText =
-                plan.price === "Custom" ? "Contact Us" : "Get Started";
+                plan.price === "Custom" ? "Contact Us" : "Contact Us"; //Change this to Get Started when needed
               return {
                 ...plan,
                 buttonText,
