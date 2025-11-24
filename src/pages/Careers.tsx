@@ -1,5 +1,7 @@
 import React from "react";
 import theme from "../theme";
+import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const openings = [
   {
@@ -32,8 +34,8 @@ const perks = [
   "Transparent leadership",
   "Wellness & learning support",
 ];
-
 export default function Careers() {
+  const navigate = useNavigate();
   return (
     <div
       className="min-h-screen w-full bg-gradient-to-br from-white to-gray-100 flex flex-col justify-center items-center"
@@ -58,15 +60,21 @@ export default function Careers() {
             <br />
             Explore our unique opportunities and shape your journey with us.
           </p>
-          <button
+          <Button
+            variant="primary"
             className="mt-2 px-8 py-4 rounded-full font-bold shadow-lg text-lg transition hover:scale-105"
             style={{
               background: theme.colors.primary,
               color: theme.colors.background,
+              fontFamily: theme.fontFamily,
+            }}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              navigate("/contact");
             }}
           >
             See Application Process
-          </button>
+          </Button>
         </div>
 
         {/* Openings Section */}
@@ -142,15 +150,21 @@ export default function Careers() {
             We value passion, creativity, and curiosity. If you’re excited to
             build the future, we want to hear from you!
           </p>
-          <button
+          <Button
+            variant="primary"
             className="px-10 py-4 rounded-full font-bold shadow-xl text-lg transition hover:scale-105"
             style={{
               background: theme.colors.secondary,
               color: theme.colors.background,
+              fontFamily: theme.fontFamily,
+            }}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              navigate("/contact");
             }}
           >
             Apply Now
-          </button>
+          </Button>
         </div>
       </div>
     </div>

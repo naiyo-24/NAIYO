@@ -5,7 +5,7 @@ export const theme = {
   fontFamily: "'Jaldi', sans-serif",
   colors: {
     primary: "#111111",
-    secondary: "#F5F5F5",
+    secondary: "#6c6a6aff",
     accent: "#616366ff",
     background: "#FFFFFF",
     text: "#222222",
