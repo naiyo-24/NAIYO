@@ -60,7 +60,7 @@ export default function Careers() {
             <br />
             Explore our unique opportunities and shape your journey with us.
           </p>
-          <Button
+          {/* <Button
             variant="primary"
             className="mt-2 px-8 py-4 rounded-full font-bold shadow-lg text-lg transition hover:scale-105"
             style={{
@@ -74,7 +74,7 @@ export default function Careers() {
             }}
           >
             See Application Process
-          </Button>
+          </Button> */}
         </div>
 
         {/* Openings Section */}
