@@ -12,9 +12,9 @@ from models.db import sqlalchemy_db as db
 from models.about_naiyo import AboutNaiyo
 from models.customer_query import CustomerQuery
 from models.partner_companies import PartnerCompanies
-
 from models.service_master import ServiceMaster
 from models.pricing_master import PricingMaster
+from models.testimonials import Testimonial
 
 # Ensure parent directory is in sys.path for imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -55,11 +55,13 @@ from routes.customer_query_routes import customer_query_bp
 from routes.partner_companies_routes import partner_companies_bp
 from routes.service_master_routes import service_master_bp
 from routes.pricing_master_routes import pricing_master_bp
+from routes.testimonials_routes import testimonials_bp
 app.register_blueprint(about_naiyo_bp)
 app.register_blueprint(customer_query_bp)
 app.register_blueprint(partner_companies_bp)
 app.register_blueprint(service_master_bp)
 app.register_blueprint(pricing_master_bp)
+app.register_blueprint(testimonials_bp)
 
 # Root route to verify backend is running
 @app.route('/')
