@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -18,6 +17,8 @@ import ProfessionalEmail from "./pages/services/ProfessionalEmail";
 import SEO from "./pages/services/SEO";
 import ServersAndHosting from "./pages/services/ServersAndHosting";
 import Careers from "./pages/Careers";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ServiceRequirementForm from "./pages/ServiceRequirementForm";
 
 function App() {
   return (
@@ -66,6 +67,10 @@ function App() {
             <Route
               path="/services/servers-and-hosting"
               element={<ServersAndHosting />}
+            />
+            <Route
+              path="/service-requirement-form"
+              element={<ServiceRequirementForm />}
             />
           </Routes>
         </main>

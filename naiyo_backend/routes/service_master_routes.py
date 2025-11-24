@@ -196,3 +196,12 @@ def get_service_master_market_research_services():
 		} for r in records
 	]
 	return jsonify(result)
+
+# GET API to fetch only unique main service names
+@service_master_bp.route('/service_master_unique_main_services', methods=['GET'])
+def get_unique_main_services():
+	# Query distinct main_service values
+	unique_services = ServiceMaster.query.with_entities(ServiceMaster.main_service).distinct().all()
+	# Flatten result to a list of strings
+	result = [s.main_service for s in unique_services if s.main_service]
+	return jsonify(result)
