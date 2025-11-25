@@ -213,22 +213,22 @@ export default function LogoBranding() {
               Our Technologies
             </h2>
             <p className="text-lg text-gray-600 mb-8 text-center">
-              We leverage industry-leading platforms, protocols, and security
-              technologies to deliver reliable, secure, and scalable
-              professional email solutions for your business.
+              We leverage industry-leading design tools, creative platforms, and
+              brand management systems to deliver impactful, memorable, and
+              scalable logo and branding solutions for your business.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                "Google Workspace",
-                "Microsoft 365",
-                "SMTP / IMAP",
-                "MX & DNS Management",
-                "DKIM / SPF / DMARC",
-                "TLS / SSL Encryption",
-                "Email Archiving",
-                "Spam & Phishing Protection",
-                "Deliverability & Reputation Tools",
-                "Gmail / Graph APIs",
+                "Adobe Illustrator",
+                "Adobe Photoshop",
+                "CorelDRAW",
+                "Figma",
+                "Canva",
+                "Sketch",
+                "Brand Style Guides",
+                "Logo Animation Tools",
+                "Pantone Color Systems",
+                "Digital Asset Management",
               ].map((tech) => (
                 <div
                   key={tech}
