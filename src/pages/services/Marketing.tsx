@@ -26,7 +26,7 @@ export default function Marketing() {
       try {
         setLoading(true);
         setError(null);
-        const apiUrl = `${apiBaseUrl}/service_master_marketing-services`;
+        const apiUrl = `${apiBaseUrl}/service_master/marketing-services`;
         const res = await fetch(apiUrl);
         if (!res.ok) throw new Error("Failed to fetch sub services");
         const data = await res.json();
@@ -46,8 +46,8 @@ export default function Marketing() {
       try {
         setPricingLoading(true);
         setPricingError(null);
-        // Fetch pricing data for 'Web Development Services'
-        const apiUrl = `${apiBaseUrl}/pricing_master_web-development-services`;
+        // Fetch pricing data for 'Marketing Services'
+        const apiUrl = `${apiBaseUrl}/pricing_master/marketing-services`;
         const res = await fetch(apiUrl);
         if (!res.ok) throw new Error("Failed to fetch pricing data");
         const data = await res.json();
