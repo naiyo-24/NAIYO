@@ -11,7 +11,7 @@ def ping():
 
 
 # GET API to fetch all columns where main_service == 'MISC'
-@service_master_bp.route('/service_master_miscservices', methods=['GET'])
+@service_master_bp.route('/service_master/miscservices', methods=['GET'])
 def get_service_master_misc_services():
 	records = ServiceMaster.query.filter_by(main_service='MISC').all()
 	result = [
@@ -28,7 +28,7 @@ def get_service_master_misc_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Web Development Services'
-@service_master_bp.route('/service_master_web-development-services', methods=['GET'])
+@service_master_bp.route('/service_master/web-development-services', methods=['GET'])
 def get_service_master_webdevelopment_services():
 	records = ServiceMaster.query.filter_by(main_service='Web Development Services').all()
 	result = [
@@ -45,7 +45,7 @@ def get_service_master_webdevelopment_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Mobile Application Services'
-@service_master_bp.route('/service_master_mobile-application-services', methods=['GET'])
+@service_master_bp.route('/service_master/mobile-application-services', methods=['GET'])
 def get_service_master_mobile_application_services():
 	records = ServiceMaster.query.filter_by(main_service='Mobile Application Services').all()
 	result = [
@@ -62,7 +62,7 @@ def get_service_master_mobile_application_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Servers & Hosting Services'
-@service_master_bp.route('/service_master_servers-and-hosting-services', methods=['GET'])
+@service_master_bp.route('/service_master/servers-and-hosting-services', methods=['GET'])
 def get_service_master_servers_and_hosting_services():
 	records = ServiceMaster.query.filter_by(main_service='Servers & Hosting Services').all()
 	result = [
@@ -79,7 +79,7 @@ def get_service_master_servers_and_hosting_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Professional Email Services'
-@service_master_bp.route('/service_master_professional-email-services', methods=['GET'])
+@service_master_bp.route('/service_master/professional-email-services', methods=['GET'])
 def get_service_master_professional_email_services():
 	records = ServiceMaster.query.filter_by(main_service='Professional Email Services').all()
 	result = [
@@ -96,7 +96,7 @@ def get_service_master_professional_email_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Domain Registration Services'
-@service_master_bp.route('/service_master_domain-registration-services', methods=['GET'])
+@service_master_bp.route('/service_master/domain-registration-services', methods=['GET'])
 def get_service_master_domain_registration_services():
 	records = ServiceMaster.query.filter_by(main_service='Domain Registration Services').all()
 	result = [
@@ -113,7 +113,7 @@ def get_service_master_domain_registration_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Marketing Services'
-@service_master_bp.route('/service_master_marketing-services', methods=['GET'])
+@service_master_bp.route('/service_master/marketing-services', methods=['GET'])
 def get_service_master_marketing_services():
 	records = ServiceMaster.query.filter_by(main_service='Marketing Services').all()
 	result = [
@@ -130,7 +130,7 @@ def get_service_master_marketing_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Business Solution Services'
-@service_master_bp.route('/service_master_business-solution-services', methods=['GET'])
+@service_master_bp.route('/service_master/business-solution-services', methods=['GET'])
 def get_service_master_business_solution_services():
 	records = ServiceMaster.query.filter_by(main_service='Business Solution Services').all()
 	result = [
@@ -147,7 +147,7 @@ def get_service_master_business_solution_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Logo & Branding Services'
-@service_master_bp.route('/service_master_logo-and-branding-services', methods=['GET'])
+@service_master_bp.route('/service_master/logo-and-branding-services', methods=['GET'])
 def get_service_master_logo_and_branding_services():
 	records = ServiceMaster.query.filter_by(main_service='Logo & Branding Services').all()
 	result = [
@@ -164,7 +164,7 @@ def get_service_master_logo_and_branding_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'SEO Services'
-@service_master_bp.route('/service_master_seo-services', methods=['GET'])
+@service_master_bp.route('/service_master/seo-services', methods=['GET'])
 def get_service_master_seo_services():
 	records = ServiceMaster.query.filter_by(main_service='SEO Services').all()
 	result = [
@@ -181,7 +181,7 @@ def get_service_master_seo_services():
 	return jsonify(result)
 
 # GET API to fetch all columns where main_service == 'Market Research Services'
-@service_master_bp.route('/service_master_market-research-services', methods=['GET'])
+@service_master_bp.route('/service_master/market-research-services', methods=['GET'])
 def get_service_master_market_research_services():
 	records = ServiceMaster.query.filter_by(main_service='Market Research Services').all()
 	result = [
@@ -198,7 +198,7 @@ def get_service_master_market_research_services():
 	return jsonify(result)
 
 # GET API to fetch only unique main service names
-@service_master_bp.route('/service_master_unique_main_services', methods=['GET'])
+@service_master_bp.route('/service_master/unique_main_services', methods=['GET'])
 def get_unique_main_services():
 	# Query distinct main_service values
 	unique_services = ServiceMaster.query.with_entities(ServiceMaster.main_service).distinct().all()

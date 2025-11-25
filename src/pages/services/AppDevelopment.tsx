@@ -23,7 +23,7 @@ export default function MobileApplications() {
       try {
         setLoading(true);
         setError(null);
-        const apiUrl = `${apiBaseUrl}/service_master_mobile-application-services`;
+        const apiUrl = `${apiBaseUrl}/service_master/mobile-application-services`;
         const res = await fetch(apiUrl);
         if (!res.ok) throw new Error("Failed to fetch sub services");
         const data = await res.json();
@@ -43,8 +43,8 @@ export default function MobileApplications() {
       try {
         setPricingLoading(true);
         setPricingError(null);
-        // Fetch pricing data for 'Web Development Services'
-        const apiUrl = `${apiBaseUrl}/pricing_master_web-development-services`;
+        // Fetch pricing data for 'Mobile Application Services'
+        const apiUrl = `${apiBaseUrl}/pricing_master/mobile-application-services`;
         const res = await fetch(apiUrl);
         if (!res.ok) throw new Error("Failed to fetch pricing data");
         const data = await res.json();

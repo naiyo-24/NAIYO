@@ -14,7 +14,7 @@ export default function ServiceRequirementForm() {
     async function fetchServiceOptions() {
       try {
         const res = await fetch(
-          `${apiBaseUrl}/service_master_unique_main_services`
+          `${apiBaseUrl}/service_master/unique_main_services`
         );
         if (!res.ok) throw new Error("Failed to fetch service options");
         const data = await res.json();

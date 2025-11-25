@@ -28,7 +28,7 @@ def get_pricing_master():
 	return jsonify(result)
 
 # API to get pricing data for the main service 'Web Development Services'
-@pricing_master_bp.route('/pricing_master_web-development-services', methods=['GET'])
+@pricing_master_bp.route('/pricing_master/web-development-services', methods=['GET'])
 def get_web_development_pricing():
 	"""
 	Get pricing_master data for the main service 'Web Development Services'.
@@ -53,7 +53,7 @@ def get_web_development_pricing():
 	return jsonify(result)
 
 # API to get pricing data for the main service 'Mobile Application Services'
-@pricing_master_bp.route('/pricing_master_mobile-application-services', methods=['GET'])
+@pricing_master_bp.route('/pricing_master/mobile-application-services', methods=['GET'])
 def get_mobile_application_pricing():
 	"""
 	Get pricing_master data for the main service 'Mobile Application Services'.
@@ -77,7 +77,7 @@ def get_mobile_application_pricing():
 		})
 	return jsonify(result)
 # API to get pricing data for the main service 'Servers & Hosting Services'
-@pricing_master_bp.route('/pricing_master_servers-and-hosting-services', methods=['GET'])
+@pricing_master_bp.route('/pricing_master/servers-and-hosting-services', methods=['GET'])
 def get_servers_and_hosting_pricing():
 	"""
 	Get pricing_master data for the main service 'Servers & Hosting Services'.
@@ -102,7 +102,7 @@ def get_servers_and_hosting_pricing():
 	return jsonify(result)
 
 # API to get pricing data for the main service 'Professional Email Services'
-@pricing_master_bp.route('/pricing_master_professional-email-services', methods=['GET'])
+@pricing_master_bp.route('/pricing_master/professional-email-services', methods=['GET'])
 def get_professional_email_pricing():
 	"""
 	Get pricing_master data for the main service 'Professional Email Services'.
