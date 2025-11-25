@@ -1,15 +1,23 @@
 import * as LucideIcons from "lucide-react";
 import SubServiceCard from "../../components/SubServiceCard";
-import apiBaseUrl from "../../apiBaseUrl";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
+import apiBaseUrl from "../../apiBaseUrl";
+import PricingCard, { PricingPlan } from "../../components/PricingCard";
+import { useEffect, useState } from "react";
 
 export default function MobileApplications() {
+  // State for sub-services
   const [subServices, setSubServices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // State for pricing plans
+  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([]);
+  const [pricingLoading, setPricingLoading] = useState(true);
+  const [pricingError, setPricingError] = useState<string | null>(null);
+
+  // Fetch sub-services
   useEffect(() => {
     async function fetchSubServices() {
       try {
@@ -29,9 +37,58 @@ export default function MobileApplications() {
     fetchSubServices();
   }, []);
 
+  // Fetch pricing plans from backend API
+  useEffect(() => {
+    async function fetchPricingPlans() {
+      try {
+        setPricingLoading(true);
+        setPricingError(null);
+        // Fetch pricing data for 'Web Development Services'
+        const apiUrl = `${apiBaseUrl}/pricing_master_web-development-services`;
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("Failed to fetch pricing data");
+        const data = await res.json();
+
+        // Transform backend data to PricingPlan[]
+        // Each service_pack_X is expected to be a JSON object with name, price, features, etc.
+        if (Array.isArray(data) && data.length > 0) {
+          const packs: PricingPlan[] = [];
+          const record = data[0]; // Assuming only one record for 'Web Development Services'
+          for (let i = 1; i <= 9; i++) {
+            const pack = record[`service_pack_${i}`];
+            if (pack && typeof pack === "object" && pack.name) {
+              packs.push({
+                name: pack.name,
+                price: pack.price,
+                features: Array.isArray(pack.features)
+                  ? pack.features.map((f: any) => ({
+                      label: f.label,
+                      available: !!f.available,
+                    }))
+                  : [],
+                popular: !!pack.popular,
+                buttonText: pack.buttonText || "Get Started",
+                buttonUrl: pack.buttonUrl || "/contact",
+              });
+            }
+          }
+          setPricingPlans(packs);
+        } else {
+          setPricingPlans([]);
+        }
+      } catch (err: any) {
+        setPricingError(err.message || "Unknown error");
+        setPricingPlans([]);
+      } finally {
+        setPricingLoading(false);
+      }
+    }
+    fetchPricingPlans();
+  }, []);
+
   return (
-    <div className="pt-16">
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
+    <div className="pt-0">
+      <section className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-[calc(100vh-0px)] flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -57,10 +114,8 @@ export default function MobileApplications() {
 
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">
-              Mobile Development Services
-            </h2>
+          <div className="text-center mb-8">
+            <h2 className="text-4xl font-bold mb-4">What We Offer</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Create powerful mobile experiences that engage users and drive
               business growth.
@@ -113,6 +168,39 @@ export default function MobileApplications() {
             )}
           </div>
         </div>
+      </section>
+
+      {/* PricingCard Section - Real-time data from backend */}
+      <section className="py-20">
+        {pricingLoading ? (
+          <div className="text-center text-gray-500 py-8">
+            Loading pricing...
+          </div>
+        ) : pricingError ? (
+          <div className="text-center text-red-500 py-8">{pricingError}</div>
+        ) : pricingPlans.length === 0 ? (
+          <div className="text-center text-gray-500 py-8">
+            No pricing plans found.
+          </div>
+        ) : (
+          <PricingCard
+            plans={pricingPlans.map((plan) => {
+              const buttonText =
+                plan.price === "Custom" ? "Contact Us" : "Contact Us"; //Change this to Get Started when needed
+              return {
+                ...plan,
+                buttonText,
+                buttonUrl:
+                  buttonText === "Contact Us"
+                    ? "/contact"
+                    : `/service-requirement-form?serviceType=Web Development Services`,
+                onClick: () => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                },
+              };
+            })}
+          />
+        )}
       </section>
 
       <section className="py-20 bg-gray-50">
